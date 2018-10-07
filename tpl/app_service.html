@@ -1,0 +1,146 @@
+<div class="bg-light lter b-b wrapper-md" style="position:relative;">
+        <h1 class="m-n font-thin h3">工作台</h1>
+        <div class="refresh">
+            <i><img id="re-img" class="refresh-icon" src="img/image/refresh.png" width="100%" height="100%"/></i>
+            <b>刷新</b>
+        </div>
+    </div>
+    <div class="wrapper-md" ng-controller="serviceController">
+        <!-- 弹窗start -->
+        <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+        <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+          <div style="overflow:hidden;width:500px;top:250px;" class="modal-dialog modal-width-664">
+            <!-- 确认打款start -->
+            <div ng-show="Ismakemoney">
+                <div class="wrapper-md">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                    <form name="form" class="form-validation" id="formTable">
+                        <div class="col b-l bg-auto no-border-xs">
+                        <div class="wrapper-md">
+                            <p style="text-align:center;color:#5488f8;font-size:22px;">是否确认</p>
+                            <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                          确认之后系统将会通知财务打款
+                            </div>
+                            <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                            <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="confirmmoney()" ng-disabled='form.$invalid'>确认</button>
+                            <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- 确认打款end -->
+          </div>
+        </div>
+      <!--弹窗end-->
+        <div ng-show="noTable">
+            <p class="noMessage">暂无新订单信息</p>
+        </div>
+        <div ng-show="fuList">
+        <div class="panel panel-default" ng-repeat="service in serviceList track by $index">
+            <div class="panel-heading financial-order-head">
+                <div style="width:50%;display: inline-block;float: left;">
+                    <span class="financical-order-time shop-transfer-name">店家名称：<span>{{service.storeName}}</span></span>
+                    <span class="financical-order-money shop-transfer-money">转账金额：<span style="color:red;">{{service.transferAccount}}</span></span>
+                </div>
+                <div ng-if="service.orderStatus1=='6'" class="financical-order-conf">
+                    <a ng-if="service.status=='11'" class="financical-order-take shop-transfer-confirm" ng-href="#/app/servicemanager/pmsg?orderNo={{service.orderNo}}">上传图片后进行转账确认</a>
+                    <a ng-if="service.status=='22'" class="financical-order-take shop-transfer-confirm" ng-href="" ng-click="confirmmoney(service.orderNo)">确认打款</a>
+                </div>
+                <div ng-if="service.orderStatus1=='7'" class="financical-order-conf">
+                    <a class="financical-order-take shop-transfer-confirm" ng-href="">已确认</a>
+                </div>
+            </div>
+            <div class="panel-body b-b b-light">
+                <div class="gm-table" style="margin-bottom: 0px;width: 100%;height:45px;float: left;">
+                    <div class="gm-table-tr" style="width:200px;height: 45px;">
+                        <label class="gm-label" style="width:70px;height:35px;line-height:35px;">开户姓名：</label>
+                        <div style="width:auto;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{service.accreditName}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:200px;height: 45px;">
+                        <label class="gm-label" style="width:auto;height:35px;line-height:35px;">手机号：</label>
+                        <div style="width:auto;float:left;height:35px;line-height:35px;">
+                            {{service.lealpersonPhone}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:200px;height: 45px;">
+                        <label class="gm-label" style="width:70px;height:35px;line-height:35px;">顾客姓名：</label>
+                        <div style="width:auto;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{service.customerName}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:200px;height: 45px;">
+                        <label class="gm-label" style="width:70px;height:35px;line-height:35px;">电话：</label>
+                        <div style="width:auto;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{service.customerPhone}}
+                        </div>
+                    </div>
+                </div>
+                <div class="gm-table" ng-repeat="item in service.project" style="margin-bottom: 0px;width: 100%;height:45px;float: left;">
+                    <div class="gm-table-tr" style="width:100%;height: 45px;">
+                        <label class="gm-label" style="width:70px;height:35px;line-height:35px;">项目名称：</label>
+                        <div style="width:auto;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{item.projectName}}
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="gm-table">
+            <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                <button style="margin-top:0px;" class="btn btn-bolting" style="margin-left: 25px;" ng-click="loadingMore()">{{loadingText}}</button>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+    
+    
+    
+    
+    <!-- <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">工作台/查看</h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="panel panel-default">
+            <div class="panel-heading financial-order-head">
+                <div style="width:50%;display: inline-block;float: left;">
+                    <span class="financical-order-time shop-transfer-name">店家名称：<span>二七聚美</span></span>
+                    <span class="financical-order-money shop-transfer-money">转账金额：<span>9000</span></span>
+                </div>
+                <div class="financical-order-conf">
+                    <a class="financical-order-take shop-transfer-confirm" ng-href="#/app/financical/gather">已确认</a>
+                </div>
+            </div>
+            <div class="panel-body b-b b-light">
+                <div class="gm-table" style="margin-bottom: 0px;">
+                    <div style="width:34%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户姓名：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">项目名称：<span style="color:#333;font-size:16px;">针剂注射 玻尿酸 海威/除皱项目</span></label>
+                    </div>
+                    <div style="width:22%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time">手机号：<span style="color:#333;font-size:16px;">19976890235</span></label>
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">手机号：<span style="color:#333;font-size:16px;">18860356585</span></label>
+                    </div>
+                    <div style="width:22%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">顾客姓名：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                    </div>
+                    <div style="width:22%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">电话：<span style="color:#333;font-size:16px;">18860356585</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    
+    
+    
+    
+    
+    
+    
+    

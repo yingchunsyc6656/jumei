@@ -1,0 +1,77 @@
+<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">完善客户信息/上传照片</h1>
+    </div>
+    <div class="wrapper-md" ng-controller="serviceFileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+        <div class="panel panel-default">
+            <div class="panel-heading financial-order-head">
+                <div style="width:50%;display: inline-block;float: left;">
+                    <span class="financical-order-time shop-transfer-name"> {{detailmsg.clinicalEnddate}}</span>
+                </div>
+            </div>
+            <div class="panel-body b-b b-light">
+                <div class="gm-table" style="margin-bottom: 0px;">
+                    <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">顾客姓名：<span style="color:#333;font-size:16px;">{{detailmsg.customerName}}</span></label>
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">设计师：<span style="color:#333;font-size:16px;">{{detailmsg.designerName}}</span></label>
+                    </div>
+                    <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                      
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">场外：<span style="color:#333;font-size:16px;">{{detailmsg.consultName}}</span></label>
+                    </div>
+                    <div style="width:33.3%;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">护士：<span style="color:#333;font-size:16px;">{{detailmsg.nurseName}}</span></label>
+                    </div>
+                </div>
+                <div style="overflow:hidden;width:100%;">
+                    <div style="display:block;" class="gm-table" ng-repeat="msg in detailmsg.list">
+                        <div class="gm-table-tr" style="width:100%;height:auto;margin-bottom:0px;">
+                            <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">项目名称：<span style="color:#333;font-size:16px;">{{msg.projectName}}</span></label>
+                        </div>
+                        <div class="gm-table-tr" style="width:100%;margin-bottom:0px;height: auto;">
+                            <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">医生：<span style="color:#333;font-size:16px;">{{msg.doctorName}}</span></label>
+                        </div>
+                    </div>
+
+
+                    <div style="overflow:hidden;">
+                        <div style="height:213px;width:auto;float:left;" class="gm-table">
+                            <div style="height:auto;position: relative;" class="gm-table-tr">
+                                <label class="gm-label">术前照片</label>
+                                <label class="upload-img" for="upload_file"></label>
+                                <input type="file" id="upload_file" ng-model="fileItems" accept="image/gif,image/jpg,image/jpeg,image/png" nv-file-select="" uploader="uploader" ng-click="oneUpload()" multiple  />
+                            </div>
+                        </div>
+                        <div class="gm-table" style="height: auto;float: left;width:auto;margin-top:28px;">
+                            <ul id="result">
+                                <li id="ques" ng-repeat="item in uploader.queue">
+                                    <i class="fa fa-times-circle" style="position: absolute;right:5px;z-index:5;top:-5px;cursor: pointer" ng-click="eliminate(uploader.queue)" style="display: none;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="overflow:hidden;">
+                        <div style="height:213px;width:auto;float:left;" class="gm-table">
+                            <div style="height:auto;position: relative;" class="gm-table-tr">
+                                <label class="gm-label">术后照片</label>
+                                <label class="upload-img" for="upload_file0"></label>
+                                <input type="file" id="upload_file0" ng-model="fileItrs" accept="image/gif,image/jpg,image/jpeg,image/png" nv-file-select="" uploader="uploader" ng-click="twoUpload()" style="display:none;" multiple  />
+                            </div>
+                        </div>
+                        <div class="gm-table" style="height: auto;width:auto;float: left;margin-top:28px;">
+                            <ul id="result-second">
+                                <li id="ques-second" ng-repeat="item in uploader.queue">
+                                    <i class="fa fa-times-circle" style="position: absolute;right:5px;z-index:5;top:-5px;cursor: pointer" ng-click="eliminater(uploader.queue)" style="display: none;"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:block;float: left;" class="gm-table">
+                    <div class="des-additem-btn">
+                        <button style="margin-right: 50px;" class="btn btn-primary" ng-click="transferComplete()">上传完成</button>
+                        <button class="btn btn-default" ng-click="gmBack()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

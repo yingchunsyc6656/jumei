@@ -1,0 +1,89 @@
+<style itemscope>
+    .slt{
+        border:none;
+        padding:6px;
+    }
+    .text-primary{
+        display: inline-block;
+        width: 30%;
+        height: 34px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #5488F8;
+        padding: 6px 0px;
+    }
+</style>
+<div class="container w-xxl w-auto-xs m-tr box-radius" ng-controller="SignupFormController" ng-init="app.settings.container = false;">
+    <!-- 弹窗start -->
+    <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+        <div style="overflow:hidden;width:500px;top:250px;" class="modal-dialog modal-width-664">
+            <!-- 查看start -->
+            <div ng-show="Islook">
+                <div class="wrapper-md">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                    <form name="form" class="form-validation" id="formTable">
+                        <div class="col b-l bg-auto no-border-xs">
+                        <div class="wrapper-md">
+                            <p style="text-align:center;color:#5488f8;font-size:22px;">已提交注册，请等待管理员审核！</p>
+                            <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                            </div>
+                            <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                            <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="startopera()">去登陆</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- 查看end -->
+        </div>
+    </div>
+
+
+
+      <a href class="block m-t text-center">
+          <img ng-src="{{app.image}}" width="99px" height="99px"/>
+      </a>
+      <div class="m-b-lg m-t">
+        <form name="form" class="form-validation">
+          <div class="text-danger wrapper text-center" ng-show="authError">
+              {{authError}}
+          </div>
+          <div class="list-group list-group-sm">
+            <div class="list-group-item">
+              <input placeholder="姓名" class="form-control no-border" ng-model="user.username" required/>
+            </div>
+            <div class="list-group-item">
+                <select class="form-control slt" name="MoneyList" ng-model="user.department" ng-change="change()" ng-init="user.department='1';change()" required>
+                    <option value="1">前台</option>
+                    <option value="2">设计师</option>
+                    <option value="3">财务</option>
+                    <option value="4">护士</option>
+                    <option value="5">客服</option>
+                    <option value="5">仓管</option>
+                </select>
+            </div>
+            <div class="list-group-item m-t">
+              <input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required/>
+            </div>
+            <div class="list-group-item">
+               <input type="password" placeholder="再次输入密码" class="form-control no-border" ng-model="user.secPassword" required/>
+            </div>
+            <div class="list-group-item m-t">
+              <input type="phone" placeholder="手机号" class="form-control no-border" ng-model="user.phone" required/>
+            </div>
+            <div class="list-group-item">
+               <input type="text" placeholder="验证码" class="form-control no-border" style="width:70%;display:inline-block;float: left;" ng-model="user.authCode" required/>
+                <button type="button" ng-click="sendCode()" ng-class="{false: 'inactive'}[disable]" style="background: #FFF;border: none;" class="text-primary">{{codeMsg}}</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="signup()" ng-disabled='form.$invalid'>提交审核</button>
+          <div class="line line-dashed"></div>
+          <p class="text-center"><small>提交后会通过管理部门进行审核后，才可以登录</small></p>
+        </form>
+      </div>
+<!--      <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>-->
+    </div>

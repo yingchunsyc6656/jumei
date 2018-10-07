@@ -1,0 +1,89 @@
+<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">添加店家</h1>
+    </div>
+    <div class="wrapper-md" ng-controller="addShopManController">
+        <div style="background-color: #fff;" class="wrapper-md">
+            <div class="text-danger wrapper text-center">
+                {{authError}}
+            </div>
+            <form id="formTable" name="form" class="form-validation">
+            <div class="gm-table">
+                <div class="gm-table-tr">
+                    <label class="gm-label">店名</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.storeName" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">地址</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.storeAddress" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">法人代表</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.lealpersonName" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">法人手机号</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.lealpersonPhone" placeholder="请输入" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" required/>
+                </div>
+            </div>
+            <div class="gm-table">
+                <div class="gm-table-tr">
+                    <label class="gm-label">授权开户人姓名</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.accreditName" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">开户银行地址</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.depositbankAddress" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">授权人开户账号</label>
+                    <input type="text" class="form-control input-sm w-lg inline m-r bank-numer" ng-model="store.accreditBanknumber" ng-change="bankCheck(store)" placeholder="请输入" required/>
+                </div>
+            </div>
+
+            <div class="gm-table">
+                <div class="gm-table-tr">
+                    <label class="gm-label">咨询负责人</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.sourcemanName" placeholder="请输入" required/>
+                </div>
+                <div class="gm-table-tr">
+                    <label class="gm-label">咨询人电话</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.sourcemanPhone" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" placeholder="请输入" required/>
+                </div>
+            </div>
+
+            <div class="gm-table">
+                <div class="gm-table-tr" style="width: 150px;">
+                    <label class="gm-label">时间区间</label>
+                    <div>
+                        <div style="width: 150px;" class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" required/>
+                            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gm-table-tr" style="width: 150px;margin-left: 21px;">
+                    <label class="gm-label"></label>
+                    <div>
+                        <div style="width: 150px;" class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gm-table-tr" style="margin-left: 21px;">
+                    <label class="gm-label">分成比率（百分比）</label>
+                    <input type="text" class="form-control input-sm w-pers inline" placeholder="请输入" ng-model="store.shareRate" ng-pattern="/^((?!0)\d{1,2}|100)$/" required/><span class="pay-yifang">支付给乙方</span>
+                </div>
+            </div>
+            <div style="margin-bottom:0px;" class="gm-table">
+                <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                    <button type="submit" class="btn btn-bolting ntr" ng-click="addStoreClick()" ng-disabled='form.$invalid'>提交</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>

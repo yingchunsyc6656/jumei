@@ -1,0 +1,65 @@
+<!-- 新增入库 -->
+<div class="bg-light lter wrapper-md pad-zero-color">
+    <h1 class="m-n font-thin h3">新增入库</h1>
+</div>
+<div class="wrapper-md" ng-controller="incomManager" style="padding:0px;">
+    <div class="text-danger wrapper text-center">
+        {{incomeError}}
+    </div>
+    <form name="form" class="form-validation">
+        <div class="panel panel-default" style="height:auto;margin:0px 15px;">
+            <div class="panel-body b-b b-light">
+            <div class="gm-table lights" ng-repeat="item in payway track by $index">
+                <div class="gm-table-tr gm-table-trw">
+                    <label class="gm-label">入库药品</label>
+                    <div style="width: 190px;" class="gm-table-trs">
+                            <!-- chosen -->
+                            <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                        <div class="chosen-container-single" style="width: 150px;height: 34px;float: left;">
+                            <a class="chosen-single chosen-default" ng-click="chosenSing($index)">
+                                <span style="text-align: center;" id="materia_{{$index}}"></span>
+                                <div>
+                                    <b></b>
+                                </div>
+                            </a>
+                            <div class="chosen-drop mater master-none" id="master{{$index}}">
+                                <ul class="chosen-results">
+                                    <li class="active-result" data-option-array-index="{{$index}}" id="{{item.materialId}}" ng-repeat="item in materialList track by $index"  ng-click="masterCk($index)">{{item.material}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gm-table-tr gm-table-trw">
+                    <label class="gm-label">数量</label>
+                    <div style="width: 190px;" class="gm-table-trs">
+                        <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="item.number" placeholder="产品数量" ng-pattern="/^([\+]?(([1-9]\d*)|(0)))([.]\d{0,2})?$/" required/>
+                    </div>
+                </div>
+                <div class="gm-table-tr gm-table-trw" style="float: left;margin-bottom:0px">
+                    <label class="gm-label"></label>
+                    <button class="btn-relative btn-delete" ng-click="delPaymentWay($index)"></button>
+                </div>
+            </div>
+            <div style="margin-bottom:0px;" class="gm-table">
+                <div class="gm-table-tr" style="float: left;margin-bottom: 0px;">
+                    <button class="btn ntr btn-add-blue" ng-click="addPaymentWay()"><i class="img_added"></i><span style="margin-left:18px;color: #fff;">添加材料</span> </button>
+                </div>
+            </div>
+            <div class="gm-table" style="margin-bottom:0px;">
+                <div class="gm-table-tr gm-table-trw">
+                    <label class="gm-label">入库人</label>
+                    <div style="width: 190px;" class="gm-table-trs">
+                        <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入姓名" ng-pattern="/^[\u4E00-\u9FA5]{2,4}$/" ng-model="operName" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="gm-table" style="margin-bottom:0px;">
+                <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                    <button type="submit" class="btn btn-bolting ntr" ng-disabled='form.$invalid' ng-click="deliverSubmit()">提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /入库管理 -->

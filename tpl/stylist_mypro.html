@@ -1,0 +1,148 @@
+<div ng-controller="MyProjectController">
+    <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  size="0" index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+        <div class="modal-dialog modal-width-664" style="overflow:hidden;top:150px;" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg','modal-width-664':'w664'}">
+            <div class="wrapper-md ng-scope">
+                <div class="wrapper-table">
+                    <div class="wrapper-md">
+                        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;height:400px;border-radius:6px;">
+                            <div class="text-danger wrapper text-center">
+                                {{authError}}
+                            </div>
+                            <form name="form" class="form-validation" id="formTable">
+                                <div class="col b-l bg-auto no-border-xs">
+                                    <div class="wrapper-md">
+                                        <div class="gm-table">
+                                            <div class="gm-table-tr">
+                                                <!-- chosen -->
+                                                <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                                                <label class="gm-label">项目1</label>
+                                                <div class="chosen-container chosen-container-single onechosen-container" style="width:150px;height: 34px;" title="">
+                                                    <a class="chosen-single chosen-default" ng-click="oneSingle()">
+                                                        <span ng-show="onepleaseSelect">请选择</span>
+                                                        <span ng-show="onedgner">{{user.oneProjectname}}</span>
+                                                        <div>
+                                                            <b></b>
+                                                        </div>
+                                                    </a>
+                                                    <div class="chosen-drop" ng-show="onechosenDrop">
+                                                        <div class="chosen-search">
+                                                            <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.oneName" ng-change="oneChange()"/>
+                                                        </div>
+                                                        <ul class="chosen-results">
+                                                            <li class="active-result" data-option-array-index="{{$index}}" ng-repeat="types in projectQueryList track by $index" ng-click="oneProject($index)">{{types.projectName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="gm-table-tr">
+                                                <label class="gm-label">项目2</label>
+                                                <div class="chosen-container chosen-container-single twochosen-container" style="width:150px;height: 34px;" title="">
+                                                    <a class="chosen-single chosen-default" ng-click="twoSingle()">
+                                                        <span ng-show="twopleaseSelect">请选择</span>
+                                                        <span ng-show="twodgner">{{user.twoProjectName}}</span>
+                                                        <div>
+                                                            <b></b>
+                                                        </div>
+                                                    </a>
+                                                    <div class="chosen-drop" ng-show="twochosenDrop">
+                                                        <div class="chosen-search">
+                                                            <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.twoName" ng-change="twoChange()"/>
+                                                        </div>
+                                                        <ul class="chosen-results">
+                                                            <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="twoProject($index)">{{types.projectName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="gm-table-tr">
+                                                <label class="gm-label">项目3</label>
+                                                <div class="chosen-container chosen-container-single threechosen-container" style="width:150px;height: 34px;" title="">
+                                                    <a class="chosen-single chosen-default" ng-click="threeSingle()">
+                                                        <span ng-show="threepleaseSelect">请选择</span>
+                                                        <span ng-show="threedgner">{{user.threeProjectname}}</span>
+                                                        <div>
+                                                            <b></b>
+                                                        </div>
+                                                    </a>
+                                                    <div class="chosen-drop" ng-show="threechosenDrop">
+                                                        <div class="chosen-search">
+                                                            <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.desName" ng-change="designerChange()"/>
+                                                        </div>
+                                                        <ul class="chosen-results">
+                                                            <li class="active-result" data-option-array-index="{{$index}}" ng-repeat="types in projectQueryList track by $index" ng-click="threeProject($index)">{{types.projectName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="gm-table">
+                                            <div class="gm-table-tr" style="width: 340px;">
+                                                <label class="gm-label">自定义项目名称</label>
+                                                <input style="cursor: not-allowed;width: 320px;" disabled="disabled" type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入自定义项目名称" ng-model="user.projectremark" required/>
+                                            </div>
+                                            <div class="gm-table-tr">
+                                                <label class="gm-label">自定义金额(元)</label>
+                                                <input id="inp1" ng-change="Ismoneycorrect()" style="width: 150px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入金额" ng-model="user.salePrice" required/>
+                                            </div>
+                                        </div>
+                                        <div class="gm-table">
+                                            <div class="gm-table-tr" style="float: none;margin: 0 auto;width:100%;text-align:center;">
+                                                <button  style="display:inline-block;margin-left:0px;" class="btn btn-bolting ntr sub-bttn" ng-disabled='form.$invalid' ng-click="projectSub()">修改</button>
+    
+    
+                                                <button style="display:inline-block;" class="btn btn-default ntr" ng-click="cancel()">返回</button>
+                                            </div>
+                                        </div>
+                                        <!-- tasks -->
+                                        <!-- / tasks -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light lter wrapper-md">
+        <h1 class="m-n font-thin h3">我的项目</h1>
+    </div>
+    <div style="overflow: hidden;" class="wrapper-md" >
+        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+            <div class="col b-l bg-auto no-border-xs">
+                <p class="stylist-add-item">
+                    <a style="color: #5488F8;position: relative;" href="#/app/stylist/addpro">
+                    <i class="add-item-icon"></i>新增项目
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;margin-top:15px;" ng-repeat="item in myProjectList track by $index">
+            <div class="col b-l bg-auto no-border-xs">
+                <div class="wrapper-md">
+                    <div class="gm-table" style="margin-bottom: 0px;">
+                        <div style="width:40%;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">添加时间：<span style="color:#333;font-size:16px;">{{item.addTime}}</span></label>
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">项目名称：<span style="color:#333;font-size:16px;">{{item.projectName}}</span></label>
+                        </div>
+                        <div style="width:30%;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;margin-top:38px;">备注名称：<span style="color:#333;font-size:16px;">{{item.projectRemark}}</span></label>
+                        </div>
+                        <div style="width:20%;" class="gm-table-tr">
+                            <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;margin-top:38px;">自定义金额：<span style="color:#333;font-size:16px;">{{item.salePrice}}元</span></label>
+                        </div>
+                        <div style="width:auto;float: right;" class="gm-table-tr">
+                        <span class="first-span" ng-click="updateRecordsId(item.projectId)"><a href="">编辑</a></span><span class="second-span" ng-click="removeProject(item.projectId)"><a href="">删除</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gm-table">
+        <div class="gm-table-tr" style="float: none;margin: 0 auto;text-align:center;">
+            <button style="margin-top:0px;" class="btn btn-bolting" ng-click="loadingMore()">{{loadingText}}</button>
+        </div>
+    </div>
+</div>

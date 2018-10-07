@@ -1,0 +1,64 @@
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">资料修改</h1>
+  </div>
+  <div class="wrapper-md" ng-controller="personalEditorController">
+      <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+          <div class="text-danger wrapper text-center">
+              {{authError}}
+          </div>
+        <!-- / content col -->
+        <div class="col b-l bg-auto no-border-xs">
+            <div class="wrapper-md">
+                <div class="gm-table" style="margin-bottom:0px;height: 42px;">
+                    <div class="gm-table-tr-personal">
+                        <img style="margin-top: -5px;margin-right: 5px;" src="img/image/img_name.png" alt="">
+                        <label class="gm-label">{{datum.username}}</label>
+                    </div>
+                    <div class="gm-table-tr-personal">
+                        <img style="margin-top: -5px;margin-right: 5px;" src="img/image/img_zhiwei.png" alt="">
+                        <label class="gm-label" ng-if="datum.department=='0'">管理员</label>
+                        <label class="gm-label" ng-if="datum.department=='1'">前台</label>
+                        <label class="gm-label" ng-if="datum.department=='2'">设计师</label>
+                        <label class="gm-label" ng-if="datum.department=='3' && datum.station=='1'">财务收银</label>
+                        <label class="gm-label" ng-if="datum.department=='3' && datum.station=='2'">财务出纳</label>
+                        <label class="gm-label" ng-if="datum.department=='4'">护士</label>
+                        <label class="gm-label" ng-if="datum.department=='5'">客服</label>
+                        <label class="gm-label" ng-if="datum.department=='6'">仓管</label>
+                    </div>
+                    <div class="gm-table-tr-personal">
+                        <img style="margin-top: -5px;margin-right: 5px;" src="img/image/img_phone.png" alt="">
+                        <label class="gm-label">{{datum.phone}}</label>
+                    </div>
+                </div>
+                <form name="form" class="form-validation">
+                    <div class="gm-table">
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">新密码</label>
+                            <div style="width: 190px;" class="gm-table-trs">
+                                <input type="password" class="form-control input-sm w-sm inline m-r" placeholder="6位以上" ng-model="user.password" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gm-table">
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">确认密码</label>
+                            <div style="width: 190px;" class="gm-table-trs">
+                                <input type="password" class="form-control input-sm w-sm inline m-r" placeholder="6位以上" ng-model="user.passwords" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gm-table">
+                        <div class="gm-table-tr" style="width: auto;">
+                            <label class="gm-label">验证码</label>
+                            <input type="text" style="float: left;" class="form-control input-sm w-sm inline m-r" placeholder="输入验证码" ng-model="user.authCode" required/>
+                            <button type="button" class="btn btn-personal-yz" style="float: left;width: 110px;" ng-click="sendCode()" ng-class="{false: 'inactive'}[disable]">{{codeMsg}}</button>
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width: 190px;margin-left: 404px;">
+                        <button class="btn btn-bolting ntr" ng-click="audit()" >提交审核</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>

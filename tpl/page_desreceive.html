@@ -1,0 +1,219 @@
+<div ng-controller="desreceiveController">
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">接待记录</h1>
+</div>
+<div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+
+<div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" modal-window="" size="0" index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+    <div class="modal-dialog modal-width-664" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg','modal-width-664':'w664'}">
+        <div class="wrapper-md ng-scope">
+            <div class="wrapper-table">
+                <tabset class="nav-tabs-alt wih">
+                    <tab>
+                        <tab-heading>
+                            <i class="glyphicon text-md text-col wrapper-sm">
+                                预约详情
+                            </i>
+                        </tab-heading>
+                        <div class="wrapper-md">
+                            <div class="wrapper-table">
+                                <ul>
+                                    <li>
+                                        <label>顾客姓名</label>
+                                        <div>{{aboutList.customername}}</div>
+                                    </li>
+                                    <li>
+                                        <label>订单编号</label>
+                                        <div>{{aboutList.orderno}}</div>
+                                    </li>
+                                    <li>
+                                        <label>电话</label>
+                                        <div>{{aboutList.phone}}</div>
+                                    </li>
+                                    <li>
+                                        <label>设计师</label>
+                                        <div>{{aboutList.desigername}}</div>
+                                    </li>
+                                    <li>
+                                        <label>来源</label>
+                                        <div>{{aboutList.sourcestore}}</div>
+                                    </li>
+                                    <li>
+                                        <label>消费金额</label>
+                                        <div>{{aboutList.costmoney}}</div>
+                                    </li>
+                                    <li>
+                                        <label>预约时间</label>
+                                        <div>{{aboutList.appointmenttime}}</div>
+                                    </li>
+                                    <li>
+                                        <label>到店时间</label>
+                                        <div>{{aboutList.arrivestoredate}}</div>
+                                    </li>
+                                    <li>
+                                        <label>当前状态</label>
+                                        <div>{{aboutList.orderstatus}}</div>
+                                    </li>
+                                    <li>
+                                        <label>预约项目</label>
+                                        <div>{{aboutList.projectremark}}</div>
+                                    </li>
+                                </ul>
+                                <div class="dal-footer">
+                                    <button class="btn-fot" ng-click="goBack()">返回</button>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab>
+                        <tab-heading>
+                            <i class="glyphicon text-md text-col wrapper-sm">
+                                客户详情
+                            </i>
+                        </tab-heading>
+                        <div class="wrapper-md">
+                            <div class="wrapper-table">
+                                <ul>
+                                    <li>
+                                        <label>顾客姓名</label>
+                                        <div>{{clientDetails.customername}}</div>
+                                    </li>
+                                    <li>
+                                        <label>电话</label>
+                                        <div>{{clientDetails.phone}}</div>
+                                    </li>
+                                    <li>
+                                        <label>生日</label>
+                                        <div>{{clientDetails.binthday}}</div>
+                                    </li>
+                                    <li>
+                                        <label>性别</label>
+                                        <div>{{clientDetails.sex}}</div>
+                                    </li>
+                                    <li>
+                                        <label>出生地</label>
+                                        <div>{{clientDetails.birthplace}}</div>
+                                    </li>
+                                    <li>
+                                        <label>常住地</label>
+                                        <div>{{clientDetails.permanentplace}}</div>
+                                    </li>
+                                    <li>
+                                        <label>常见病史</label>
+                                        <div>{{clientDetails.commonhistory}}</div>
+                                    </li>
+                                    <li>
+                                        <label>其他传染 性疾病</label>
+                                        <div>{{clientDetails.othercontagion}}</div>
+                                    </li>
+                                    <li>
+                                        <label>其他传染 性疾病</label>
+                                        <div>{{clientDetails.medicinehistory}}</div>
+                                    </li>
+                                </ul>
+                                <div class="dal-footer">
+                                    <button class="btn-fot" ng-click="cancel()">返回</button>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div><!-- end ngRepeat: tab in tabs -->
+</div>
+
+      <div class="wrapper-md">
+          <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+            <!-- / content col -->
+            <div class="col b-l bg-auto no-border-xs">
+                  <div class="wrapper-md">
+                        <div class="gm-table">
+                            <div class="gm-table-tr">
+                                <label class="gm-label">查询</label>
+                                <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="姓名或电话查询" ng-model="user.queryData" required/>
+                            </div>
+                            <div class="gm-table-tr">
+                                <label class="gm-label">时间区间</label>
+                                <div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="gm-table-tr">
+                                <label class="gm-label"></label>
+                                <div>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gm-table-tr" style="width: 190px;">
+                                <button class="btn btn-bolting ntr" ng-click="Screening()">筛选</button>
+                            </div>
+                        </div>
+                    <!-- tasks -->
+                    <div class="table-responsive" ng-show="noRecords">
+                        <p class="noMessage">暂无操作记录信息</p>
+                    </div>
+                    <div ng-show="isRecords" style="width:100%;float: left;">
+                      <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                        <div class="panel panel-default panel-bg">
+                            <div class="text-danger wrapper text-center">
+                                {{authError}}
+                            </div>
+                          <div class="table-responsive" >
+                            <table class="table table-striped m-b-none">
+                                <thead>
+                                    <tr>
+                                      <th  style="width:8%">姓名</th>
+                                      <th  style="width:35%">预约项目</th>
+                                      <th  style="width:8%">外场咨询</th>
+                                      <th  style="width:14%">接待时间</th>
+                                      <th  style="width:14%">项目金额</th>
+                                      <th  style="width:10%">状态</th>
+                                      <th style="width: 11%;">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="records in recordList track by $index">
+                                        <td>{{records.customerName}}</td>
+                                        <td>{{records.projectRemark}}</td>
+                                        <td>{{records.outConsult}}</td>
+                                        <td>{{records.receptionDate}}</td>
+                                        <td>{{records.costMoney}}</td>
+                                        <td ng-if="records.orderStatus=='1'"><span class="label bg-warning" title="Disabled">已预约</span></td>
+                                        <td ng-if="records.orderStatus=='2'"><span class="label bg-warning" title="Disabled">到店</span></td>
+                                        <td ng-if="records.orderStatus=='3'"><span class="label bg-warning" title="Disabled">医生设计</span></td>
+                                        <td ng-if="records.orderStatus=='4'"><span class="label bg-warning" title="Active">收钱完成</span></td>
+                                        <td ng-if="records.orderStatus=='5'"><span class="label bg-warning" title="Active">手术中</span></td>
+                                        <td ng-if="records.orderStatus=='6'"><span class="label bg-warning" title="Active">手术完成</span></td>
+                                        <td ng-if="records.orderStatus=='7'"><span class="label bg-success" title="Suspended">客服确认</span></td>
+                                        <td ng-if="records.orderStatus=='8'"><span class="label bg-danger" title="Disabled">完成</span></td>
+                                        <td ng-if="records.orderStatus=='9'"><span class="label bg-danger" title="Disabled">未完成</span>
+                                        </td>
+                                        <td>
+                                            <span class="second-span-one" ng-click="openIs()"><a href="" ng-click="openRecordsId($index)">详情</a></span>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                            </table>
+                              <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- / tasks -->
+                  </div>
+            </div>
+            <!-- / content col -->
+          </div>
+        </div>
+</div>

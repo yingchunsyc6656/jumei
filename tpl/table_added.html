@@ -1,0 +1,261 @@
+<div class="bg-light lter wrapper-md">
+  <h1 class="m-n font-thin h3">新增名单</h1>
+</div>
+<div class="wrapper-md" ng-controller="TableAddController">
+    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+      <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+      <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" modal-window="" size="0" index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+        <div class="modal-dialog modal-width-664" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg','modal-width-664':'w664'}">
+          <div class="wrapper-md ng-scope">
+            <div class="wrapper-table">
+              <div style="text-align: center;color:#F77C8C;font-size: 14px;">
+                {{msgError}}
+              </div>
+              <div class="dal-footer">
+                <button class="btn-fot" ng-click="cancel()">确认</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- end ngRepeat: tab in tabs -->
+      </div>
+      <!-- / content col -->
+      <div class="text-danger wrapper text-center">
+        {{authError}}
+      </div>
+      <div class="col b-l bg-auto no-border-xs">
+            <div class="wrapper-md">
+              <div class="gm-table">
+                <div class="gm-table-tr">
+                  <label class="gm-label">姓名</label>
+                  <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="姓名或电话查询" ng-model="user.querydata" required/>
+                </div>
+                <div class="gm-table-trs">
+                  <label class="gm-label"></label>
+                  <button class="btn btn-bolting gm-btr" ng-click="query()">查询</button>
+                </div>
+                <div class="gm-table-trs">
+                  <label class="gm-label"></label>
+                  <button class="btn btn-ting gm-btr" ng-click="manuallyAdd()">手动添加</button>
+                </div>
+              </div>
+              <div class="gm-table" style="float: left;">
+                <p>1.姓名或电话查询可进行模糊查询：尾号：4135  姓名：某某</p>
+                <p>2.可以直接手动添加输入客户各项信息</p>
+              </div>
+              <!--查询结果-->
+              <div ng-show="queryResult">
+                <div class="gm-table ft" style="height: 40px;">
+                  <h3 style="font-size: 18px;color: #4A4A4A;">客户信息结果</h3>
+                </div>
+                <!-- tasks -->
+                <div style="width:100%;float: left;">
+                  <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                    <div class="panel panel-default panel-bg">
+                      <div class="table-responsive">
+                        <table class="table table-striped m-b-none" >
+                          <!--<table ui-jq="dataTable" class="table table-striped m-b-none" >-->
+                          <thead>
+                            <tr>
+                              <th  style="width:25%">姓名</th>
+                              <th  style="width:25%">电话</th>
+                              <th  style="width:20%">年龄</th>
+                              <th  style="width:30%">操作</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr data-option-array-index="{{$index}}" ng-repeat="details in detailList track by $index">
+                              <td>{{details.customerName}}</td>
+                              <td>{{details.customerPhone}}</td>
+                              <td>{{details.age}}</td>
+                              <td><button class="bts btn-bog" ng-click="detailsSelect($index)">选择</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / tasks -->
+              </div>
+              <!--查询结果-->
+              <!--table-->
+              <div class="customer_table" ng-show="customerTable">
+                <form name="form" class="form-validation" id="formTable">
+                <div>
+                <div class="gm-table ft">
+                  <h3 style="font-size: 18px;color: #4A4A4A;">预约客户资料</h3>
+                </div>
+                  <div class="text-danger wrapper text-center" ng-show="putShow">
+                    {{putError}}
+                  </div>
+                <div class="gm-table">
+                  <div class="gm-table-tr">
+                    <label class="gm-label">姓名</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r customername" placeholder="输入姓名" ng-model="user.customername" ng-pattern="/^[\u4E00-\u9FA5]{2,4}$/" required/>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">电话</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r phone" placeholder="输入电话" ng-model="user.customerphone" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" required/>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">年龄</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r age" placeholder="输入年龄" ng-model="user.customerage" ng-pattern="/^[0-9]{1,2}$/" required/>
+                  </div>
+                  <div class="gm-table-tr">
+                    <!-- chosen -->
+                    <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                    <label class="gm-label">咨询设计师</label>
+                    <div class="chosen-container chosen-container-single" style="width: 150px;" title="">
+                      <a class="chosen-single chosen-default" ng-click="chosenSingle()">
+                        <span ng-show="pleaseSelect">请选择</span>
+                        <span ng-show="dgner">{{user.designame}}</span>
+                        <div>
+                          <b></b>
+                        </div>
+                      </a>
+                      <div class="chosen-drop" ng-show="chosenDrop">
+                        <div class="chosen-search">
+                          <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.desName" ng-change="designerChange()"/>
+                        </div>
+                        <ul class="chosen-results">
+                          <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="roles in roleQueryList track by $index" ng-click="roleClick($index)">{{roles.rolename}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">场外老师：</label>
+                    <div>
+                      <div class="input-group">
+                        <select name="" id="" ng-model="outList" ng-click="outchange(outList)" class="form-control" style="width:150px;height:35px;line-height:35px;display: inline-block;">
+                          <option id="{{role.consultId}}" value="{{role.consultname}}" ng-repeat="role in outQueryList track by $index">{{role.consultname}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">渠道商</label>
+                    <div class="chosen-container chosen-container-single channel" style="width: 150px;" title="">
+                      <a class="chosen-single chosen-default" ng-click="channelSingle()">
+                        <span ng-show="channelSelect">请选择</span>
+                        <span ng-show="canel">{{user.ordersource}}</span>
+                        <div>
+                          <b></b>
+                        </div>
+                      </a>
+                      <div class="chosen-drop" ng-show="channelDrop">
+                        <div class="chosen-search">
+                          <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.chaName" ng-change="channelChange()"/>
+                        </div>
+                        <ul class="chosen-results">
+                          <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="quers in sourceQueries track by $index" ng-click="channelClick($index)">{{quers.sourcename}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">预约时间</label>
+                    <div>
+                      <div class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr" style="margin-left: 25px;">
+                    <label class="gm-label">是否麻醉</label>
+                    <div class="m-b-sm">
+                      <div class="btn-group" ng-init="isanesthesia = '0'" ng-click="isanes()">
+                        <label class="btn bts-info" ng-model="isanesthesia" btn-radio="'0'"><i class="fa fa-check text-active"></i>是</label>
+                        <label class="btn btn-bolt" ng-model="isanesthesia" btn-radio="'1'"><i class="fa fa-check text-active"></i>否</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr gm-table-trw gm-table-tr-addpre">
+                      <label class="gm-label">预约项目备注:</label>
+                      <textarea maxlength="50" style="resize: none;" id="remark" class="form-control form-control-other" rows="6" placeholder="预约项目如：双眼皮 隆胸" ng-model="user.projectremark" ng-change="textRemark()" /></textarea>
+                  </div>
+                  <div class="gm-table-tr gm-table-trw gm-table-tr-addpre" style="width: 100%;">
+                    <label class="gm-label">
+                      <a style="text-decoration: none;outline: none;color: #F77C8C;">
+                        友情提示：请先选择下面标签，在输入备注，否则将被覆盖清空
+                      </a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="gm-table ft" style="height: auto;">
+                  <ul>
+                    <li>双眼皮</li>
+                    <li>隆鼻</li>
+                    <li>假体下巴</li>
+                    <li>V脸套餐</li>
+                    <li>全脸填充</li>
+                    <li>蛋白线提升</li>
+                    <li>水光针</li>
+                    <li>去眼袋</li>
+                    <li>私密</li>
+                    <li>纹眉</li>
+                  </ul>
+              </div>
+              <div style="height:auto;float: none;" class="gm-table-trs gm-table-tr-mar">
+                <button type="submit" class="btn btn-bolting gm-btr" id="put_in" ng-click="ppap()" ng-disabled='form.$invalid'>提交</button>
+              </div>
+              </form>
+             </div>
+              <!--table-->
+              <!--近期预约状况-->
+              <div ng-show="newOrder">
+                <div class="gm-table ft" style="height: 40px;">
+                  <h3 style="font-size: 18px;color: #4A4A4A;">近期预约状况</h3>
+                </div>
+                <!-- tasks -->
+                <div style="width:100%;float: left;">
+                  <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                    <div class="panel panel-default panel-bg">
+                      <div class="table-responsive">
+                        <table class="table table-striped m-b-none" >
+                          <thead>
+                            <tr>
+                              <th  style="width:10%">预约单号</th>
+                              <th  style="width:28%">预约项目</th>
+                              <th  style="width:13%">设计师</th>
+                              <th  style="width:14%">预约时间</th>
+                              <th  style="width:14%">到店时间</th>
+                              <th  style="width:21%">状态</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="orders in ordersList">
+                              <td>{{orders.orderNo}}</td>
+                              <td>{{orders.projectRemark}}</td>
+                              <td>{{orders.designerName}}</td>
+                              <td>{{orders.appointmentTime}}</td>
+                              <td>{{orders.arrivestoreDate}}</td>
+                              <td ng-if="orders.orderStatus=='1'"><span class="label bg-warning" title="Disabled">已预约</span></td>
+                              <td ng-if="orders.orderStatus=='2'"><span class="label bg-warning" title="Disabled">到店</span></td>
+                              <td ng-if="orders.orderStatus=='3'"><span class="label bg-warning" title="Disabled">医生设计</span></td>
+                              <td ng-if="orders.orderStatus=='4'"><span class="label bg-warning" title="Active">收钱完成</span></td>
+                              <td ng-if="orders.orderStatus=='5'"><span class="label bg-warning" title="Active">手术中</span></td>
+                              <td ng-if="orders.orderStatus=='6'"><span class="label bg-warning" title="Active">手术完成</span></td>
+                              <td ng-if="orders.orderStatus=='7'"><span class="label bg-success" title="Suspended">客服确认</span></td>
+                              <td ng-if="orders.orderStatus=='8'"><span class="label bg-success" title="Suspended">完成</span></td>
+                              <td ng-if="orders.orderStatus=='9'"><span class="label bg-danger" title="Disabled">未完成</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="recentPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / tasks -->
+              </div>
+              <!--近期预约状况-->
+            </div>
+      </div>
+    </div>
+  </div>

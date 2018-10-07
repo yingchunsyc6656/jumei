@@ -1,0 +1,120 @@
+  <div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">新增客户</h1>
+  </div>
+  <div class="wrapper-md" ng-controller="UserAddController">
+      <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+        <!-- / content col -->
+        <form name="form" class="form-validation" id="formTable">
+            <div class="col b-l bg-auto no-border-xs">
+                <div class="wrapper-md">
+                    <div class="text-danger wrapper text-center">
+                        {{authError}}
+                    </div>
+                    <div class="gm-table">
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">姓名</label>
+                            <input type="text" class="form-control input-sm w-sm inline m-r customername" placeholder="输入关键词" ng-model="user.customername" ng-pattern="/^[\u4E00-\u9FA5]{2,4}$/" required/>
+                        </div>
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">电话</label>
+                            <input type="text" class="form-control input-sm w-sm inline m-r phone" placeholder="输入电话" ng-model="user.customerphone" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" required/>
+                        </div>
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">性别</label>
+                            <div style="width: 190px;" class="gm-table-trs">
+                                <div class="btn-group" ng-init="sex = '0'" ng-click="issex()">
+                                    <label class="btn bts-info" ng-model="sex" btn-radio="'0'"><i class="fa fa-check text-active"></i>男</label>
+                                    <label class="btn btn-bolt" ng-model="sex" btn-radio="'1'"><i class="fa fa-check text-active"></i> 女</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gm-table">
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">身份证号</label>
+                            <input type="text" class="form-control input-sm w-sm inline m-r idno" placeholder="输入身份证号" ng-model="user.idno" ng-blur="Idno();" ng-pattern="/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/" required/>
+                        </div>
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">出生年月日</label>
+                            <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入关键词" ng-model="user.birthday" required/>
+                        </div>
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">婚姻状况</label>
+                            <div style="width: 190px;" class="gm-table-trs">
+                                <div class="btn-group" ng-click="ismarriage()" ng-init="marriage = '0'">
+                                    <label class="btn bts-info" ng-model="marriage" btn-radio="'0'"><i class="fa fa-check text-active"></i>已婚</label>
+                                    <label class="btn btn-bolt" ng-model="marriage" btn-radio="'1'"><i class="fa fa-check text-active"></i>未婚</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gm-table">
+                        <div style="width: 380px;" class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">出生地</label>
+                            <input style="width: 340px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="请输入出生地" ng-model="user.birthplace" required/>
+                        </div>
+                        <div class="gm-table-tr gm-table-trw">
+                            <label class="gm-label">常住地</label>
+                            <input style="width: 340px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="请输入常住地" ng-model="user.permanentplace" required/>
+                        </div>
+                    </div>
+                    <div style="width: 65%;" class="gm-table-tr gm-table-tr-fn">
+                        <label class="gm-label">常见疾病</label>
+                        <div class="usual-disease">
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input class="checkb" type="checkbox" name="ckb" value="0"><i></i> 过敏史
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input class="checkb" type="checkbox" name="ckb" value="1"><i></i> 疤痕史
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input class="checkb" type="checkbox" name="ckb" value="2"><i></i> 光敏史
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input type="checkbox" name="ckb" value="3"><i></i> 糖尿病
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input type="checkbox" name="ckb" value="4"><i></i> 抑郁类
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input type="checkbox" name="ckb" value="5"><i></i> 遗产类
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                            <input type="checkbox" name="ckb" value="6"><i></i> 肾病
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input type="checkbox" name="ckb" value="7"><i></i> 肝病
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                                <input type="checkbox" name="ckb" value="8"><i></i> 免疫性疾病
+                            </label>
+                            <label class="checkbox-inline i-checks unusal_ck">
+                              <input type="checkbox" name="ckb" value="9"><i></i> 精神类病
+                          </label>
+                          <label class="checkbox-inline i-checks unusal_ck">
+                            <input type="checkbox" name="ckb" value="10"><i></i> 心血管类疾病
+                          </label>
+                        </div>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                        <label class="gm-label">其他传染性疾病</label>
+                        <textarea maxlength="50" style="resize: none;" ng-model="user.othercontagion" class="form-control form-control-other" rows="6" placeholder="如果以上未出现可在此备注"></textarea>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                        <label class="gm-label">常见服药历史(包括营养类)</label>
+                        <textarea maxlength="50" style="resize:none;" class="form-control form-control-other" ng-model="medicinehistory" rows="6" placeholder="设计方案或健康状况描述"></textarea>
+                    </div>
+                    <div class="gm-table-tr" style="width: 190px;margin-left: 404px;">
+                      <button class="btn btn-bolting ntr" ng-click="add()" ng-disabled='form.$invalid'>添加</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- / content col -->
+      </div>
+  </div>
+
+
+
+
+        

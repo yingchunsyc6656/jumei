@@ -1,0 +1,85 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">工作台/收款</h1>
+</div>
+<div class="wrapper-md" ng-controller="FinancicalGather">
+    <!-- 退回更改start -->
+    <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+        <div style="overflow:hidden;width:500px;top:250px;" class="modal-dialog modal-width-664">
+            <div>
+                <div class="wrapper-md">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                        <!-- / content col -->
+                        <form name="form" class="form-validation" id="formTable">
+                            <div class="col b-l bg-auto no-border-xs">
+                                <div class="wrapper-md">
+                                    <p style="text-align:center;color:#5488f8;font-size:22px;">请确认账单与收款金额一致</p>
+                                    <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                        <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="subClick()">确认无误</button>
+                                        <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="lseClick()">再看看</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- / content col -->
+                    </div>
+                </div>
+            </div>
+        </div><!-- end ngRepeat: tab in tabs -->
+    </div>
+    <!--退回更改end-->
+    <div class="panel panel-default" style="height:auto;">
+        <div class="panel-heading financial-order-head">
+            <div style="width:50%;display: inline-block;float: left;">
+                <span class="financical-order-time">{{queOrder.clinicalDate}}</span>
+                <span class="financical-order-money">订单金额：<span>{{queOrder.costMoney}}</span></span>
+            </div>
+        </div>
+    <form name="form" class="form-validation">
+        <div class="panel-body b-b b-light">
+            <div class="gm-table-tr" style="width:100%;margin-bottom: 0;">
+                <label class="gm-label">收款备注</label>
+                <input style="width:400px;height: 35px;float: left;" ng-model="proceedRemark" class="form-control form-control-other" placeholder="说明备注" required/>
+                <div class="ding" ng-if="queOrder.payStatus=='1'">订单已经支付<b>{{queOrder.proceedMoney}}</b></div>
+            </div>
+        </div>
+        <div class="panel-body b-b b-light" style="padding-top: 0px;">
+            <div class="gm-table" ng-repeat="item in payway track by $index">
+                <div class="gm-table-tr gm-table-trw" id="masters{{$index}}">
+                    <label class="gm-label">付款方式</label>
+                    <select class="form-control slt" style="width:150px;" name="" ng-model="item.receiptStatus" ng-change="change($index)" ng-init="item.receiptStatus='1';change($index)" required>
+                        <option value="1">现金</option>
+                        <option value="2">支付宝</option>
+                        <option value="3">微信</option>
+                        <option value="4">刷卡</option>
+                        <option value="5">贷款</option>
+                    </select>
+                </div>
+                <div class="gm-table-tr gm-table-trw">
+                    <label class="gm-label">金额</label>
+                    <div style="width: 190px;" class="gm-table-trs">
+                        <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="item.receiptMoney" placeholder="实收金额" ng-pattern="/^[1-9]\d*$/" ng-change="receiptChange()" required/>
+                    </div>
+                </div>
+                <div class="gm-table-tr gm-table-trw" style="float: left;margin-bottom:0px">
+                    <label class="gm-label"></label>
+                    <button class="btn-relative btn-delete" ng-click="delPaymentWay($index)"></button>
+                </div>
+            </div>
+        </div>
+        <div style="margin-bottom:0px;padding-top: 0;margin-left:16px;" class="gm-table">
+            <div class="gm-table-tr" style="float: left;margin-bottom: 0px;">
+                <button class="btn ntr btn-add-blue" ng-click="addPaymentWay($index)"><i class="img_added"></i><span style="margin-left:18px;color: #fff;">添加付款</span> </button>
+            </div>
+        </div>
+        <div class="gm-table">
+            <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                <button type="submit" class="btn btn-bolting ntr" id="deliver-sub" ng-disabled='form.$invalid' ng-click="deliverSubmit()">确认收款</button>
+            </div>
+        </div>
+        <p class="text-danger text-center" id="textFom" style="display:none;">
+            请添加付款项后再提交
+        </p>
+    </form>
+    </div>
+</div>

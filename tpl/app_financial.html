@@ -1,0 +1,94 @@
+<div class="bg-light lter b-b wrapper-md" style="position:relative;">
+    <h1 class="m-n font-thin h3">财务工作台</h1>
+    <div class="refresh">
+        <i><img id="re-img" class="refresh-icon" src="img/image/refresh.png" width="100%" height="100%"/></i>
+        <b>刷新</b>
+    </div>
+</div>
+<div class="wrapper-md" ng-controller="financialController">
+    <!-- 退回更改start -->
+        <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+        <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+          <div style="overflow:hidden;width:500px;top:250px;" class="modal-dialog modal-width-664">
+            <div ng-show="Isedituser">
+              <div class="wrapper-md">
+                <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                  <!-- / content col -->
+                  <form name="form" class="form-validation" id="formTable">
+                    <div class="col b-l bg-auto no-border-xs">
+                      <div class="wrapper-md">
+                        <p style="text-align:center;color:#5488f8;font-size:22px;">退回说明</p>
+                        <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                          <label class="gm-label">退回原因</label>
+                          <textarea style="resize: none;width:400px" ng-model="questionRemar" class="form-control form-control-other" rows="6" placeholder="说明备注"></textarea>
+                        </div>
+                        <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                          <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="update()" ng-disabled='form.$invalid'>确认</button>
+                          <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- / content col -->
+                </div>
+              </div>
+            </div>
+            <div ng-show="Isend">
+                <div class="wrapper-md">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                    <form name="form" class="form-validation" id="formTable">
+                        <div class="col b-l bg-auto no-border-xs">
+                        <div class="wrapper-md">
+                            <p style="text-align:center;color:#5488f8;font-size:22px;">你确定要结束订单吗？</p>
+                            <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                        <!-- 请确认手术是否完成并且拍摄照片 -->
+                            </div>
+                            <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                            <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="endOorder()" ng-disabled='form.$invalid'>确认</button>
+                            <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+          </div><!-- end ngRepeat: tab in tabs -->
+        </div>
+      <!--退回更改end-->
+    <div class="panel panel-default" ng-repeat="bench in workbenchList track by $index">
+        <div class="panel-heading financial-order-head">
+            <div style="width:50%;display: inline-block;float: left;">
+                <span class="financical-order-time">{{bench.designerDate}}</span>
+                <span class="financical-order-money">订单金额：<span increment-number incnum="bench.costMoney"></span></span>
+            </div>
+            <div class="financical-order-right">
+                <a class="financical-order-check" ng-href="#/app/financical/checkorder?orderNo={{bench.orderNo}}" ng-if="bench.orderStatus=='3' || bench.orderStatus=='4' || bench.orderStatus=='5' || bench.orderStatus=='6' || bench.orderStatus=='7' || bench.orderStatus=='8'"><i></i>查看</a>
+                <a class="financical-order-x" ng-href="#/app/room/plug?orderNo={{bench.orderNo}}" ng-if="bench.orderStatus=='3' || bench.orderStatus=='4' || bench.orderStatus=='5' || bench.orderStatus=='6' || bench.orderStatus=='7' || bench.orderStatus=='8'"><i></i>出入库</a>
+                <a class="financical-order-return" href="" ng-click="backchange($index)"   ng-if="bench.orderStatus=='3'"><i></i>退回更改</a>
+                <a class="financical-order-del" href=""  ng-if="bench.orderStatus=='3'" ng-click="orderOrder($index)"><i></i>结束订单</a>
+                <a style="margin-right:0px;" class="financical-order-take" ng-href="#/app/financical/gather?orderNo={{bench.orderNo}}" ng-if="bench.orderStatus=='3'"><i></i>收款</a>
+            </div>
+        </div>
+        <div class="panel-body b-b b-light">
+            <div class="gm-table" style="margin-bottom: 0px;">
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">顾客姓名：<span style="color:#333;font-size:16px;">{{bench.customerName}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">设计师：<span style="color:#333;font-size:16px;">{{bench.designerName==''?'-':bench.designerName}}</span></label>
+                </div>
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">电话：<span style="color:#333;font-size:16px;">{{bench.customerPhone}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">场外：<span style="color:#333;font-size:16px;">{{bench.consultName}}</span></label>
+                </div>
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">来源：<span style="color:#333;font-size:16px;">{{bench.orderSource}}</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gm-table">
+        <div class="gm-table-tr" style="float: none;margin: 0 auto;text-align:center;">
+            <button style="margin-top:0px;" class="btn btn-bolting" style="margin-left: 25px;" ng-click="loadingMore()">{{loadingText}}</button>
+        </div>
+    </div>
+</div>

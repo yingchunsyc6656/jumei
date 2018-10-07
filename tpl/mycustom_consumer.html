@@ -1,0 +1,60 @@
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">我的客户</h1>
+  </div>
+  <div class="wrapper-md" ng-controller="MyCustomController">
+      <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+        <!-- / content col -->
+        <div class="col b-l bg-auto no-border-xs">
+              <div class="wrapper-md">
+                <!-- tasks -->
+                <div style="width:100%;float: left;">
+                  <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                    <div class="panel panel-default panel-bg">
+                      <div class="table-responsive" ng-show="noTable">
+                          <p class="noMessage">暂无客户名单信息</p>
+                      </div>
+                      <div ng-show="queryResult" class="table-responsive">
+                        <table class="table table-striped m-b-none">
+                          <thead>
+                          <tr>
+                            <th style="width:8%;">订单号</th>
+                            <th  style="width:8%">姓名</th>
+                            <th  style="width:12%">电话</th>
+                            <th  style="width:40%">项目</th>
+                            <th  style="width:14%">预约时间</th>
+                            <th  style="width:14%">到店时间</th>
+                            <th  style="width:5%">状态</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="roll in rollList">
+                                <td>{{roll.orderNo}}</td>
+                              <td>{{roll.customerName}}</td>
+                              <td>{{roll.customerPhone}}</td>
+                              <td>{{roll.projectRemark}}</td>
+                              <td>{{roll.appointmentTime}}</td>
+                              <td>{{roll.arrivestoreDate}}</td>
+                              <td ng-if="roll.orderStatus=='1'"><span class="label bg-warning" title="Disabled">已预约</span></td>
+                              <td ng-if="roll.orderStatus=='2'"><span class="label bg-warning" title="Disabled">到店</span></td>
+                              <td ng-if="roll.orderStatus=='3'"><span class="label bg-warning" title="Disabled">医生设计</span></td>
+                              <td ng-if="roll.orderStatus=='4'"><span class="label bg-warning" title="Active">收钱完成</span></td>
+                              <td ng-if="roll.orderStatus=='5'"><span class="label bg-warning" title="Active">确认收钱</span></td>
+                              <td ng-if="roll.orderStatus=='6'"><span class="label bg-warning" title="Active">手术中</span></td>
+                              <td ng-if="roll.orderStatus=='7'"><span class="label bg-success" title="Suspended">客服确认</span></td>
+                              <td ng-if="roll.orderStatus=='8'"><span class="label bg-danger" title="Disabled">完成</span></td>
+                              <td ng-if="roll.orderStatus=='9'"><span class="label bg-danger" title="Disabled">未完成</span></td>
+                              <td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / tasks -->
+              </div>
+        </div>
+        <!-- / content col -->
+      </div>
+    </div>

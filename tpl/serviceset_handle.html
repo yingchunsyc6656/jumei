@@ -1,0 +1,43 @@
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">操作记录</h1>
+</div>
+<div class="wrapper-md" ng-controller="sethandleController">
+    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+        <div class="col b-l bg-auto no-border-xs">
+            <div class="wrapper-md">
+                <div style="width:100%;float: left;">
+                    <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                        <div class="panel panel-default panel-bg" style="box-shadow:none;border:none;">
+                            <div class="table-responsive" ng-show="noRecords">
+                                <p class="noMessage">暂无操作记录信息</p>
+                            </div>
+                            <div ng-show="isRecords" class="table-responsive">
+                                <table  class="table table-striped m-b-none">
+                                    <thead>
+                                    <tr>
+                                        <th  style="width:15%">时间</th>
+                                        <th  style="width:35%">店铺名称</th>
+                                        <th  style="width:35%">转账金额</th>
+                                        <th style="width: 15%">操作人</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="ds in detailList">
+                                        <td>{{ds.operateDate}}</td>
+                                        <td>{{ds.orderSource}}</td>
+                                        <td>{{ds.transferAccount}}</td>
+                                        <td>
+                                            <span style="padding:0px;" class="second-span">{{ds.operator}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">店铺转账/确认转账</h1>
+</div>
+<div class="wrapper-md" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+    <div class="panel panel-default">
+        <div class="panel-heading financial-order-head">
+            <div style="width:50%;display: inline-block;float: left;">
+                <span class="financical-order-time shop-transfer-name">店家名称：<span>{{transfer.storeName}}</span></span>
+                <span class="financical-order-money shop-transfer-money">转账金额：<span increment-number incnum="transfer.transferAccount"></span></span>
+            </div>
+        </div>
+        <div class="panel-body b-b b-light">
+            <div class="gm-table" style="margin-bottom: 0px;">
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户姓名：<span style="color:#333;font-size:16px;">{{transfer.accreditName}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">咨询负责人：<span style="color:#333;font-size:16px;">{{transfer.sourcemanName}}</span></label>
+                </div>
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户账号：<span style="color:#333;font-size:16px;">{{transfer.accreditBanknumber}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">手机号：<span style="color:#333;font-size:16px;">{{transfer.sourcemanPhone}}</span></label>
+                </div>
+                <div style="width:33.3%;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户地址：<span style="color:#333;font-size:16px;">{{transfer.depositbankAddress}}</span></label>
+                </div>
+            </div>
+
+            <div style="height:213px;" class="gm-table">
+                <div style="height:auto;position: relative;" class="gm-table-tr">
+                    <label class="gm-label">转账截图</label>
+                    <label class="upload-img" for="upload_file"></label>
+                    <input type="file" id="upload_file" ng-model="fileItems" accept="image/gif,image/jpg,image/jpeg,image/png" nv-file-select="" uploader="uploader" multiple  />
+                </div>
+            </div>
+            <div class="gm-table" style="height: auto;float: left;">
+                <ul id="result">
+                    <li id="ques" ng-repeat="item in uploader.queue">
+                        <i class="fa fa-times-circle" style="position: absolute;right:5px;z-index:5;top:-5px;cursor: pointer" ng-click="eliminate(uploader.queue)" style="display: none;"></i>
+                    </li>
+                </ul>
+            </div>
+            <div style="display:block;float: left;" class="gm-table">
+                <div class="gm-table-tr">
+                    <label class="gm-label">转账备注</label>
+                    <input style="width: 320px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入关键词" ng-model="receiptRemark" required/>
+                </div>
+            </div>
+            <div style="display:block;float: left;" class="gm-table">
+                <div class="des-additem-btn">
+                    <button style="margin-right: 50px;" class="btn btn-primary" ng-click="transferComplete()">转账完成</button>
+                    <button class="btn btn-default" ng-click="gmBack()">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

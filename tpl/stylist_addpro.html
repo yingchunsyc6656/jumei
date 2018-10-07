@@ -1,0 +1,99 @@
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">我的项目</h1>
+  </div>
+  <div class="wrapper-md" ng-controller="AddProController">
+      <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+          <div class="text-danger wrapper text-center">
+              {{authError}}
+          </div>
+      <form name="form" class="form-validation" id="formTable">
+        <!-- / content col -->
+        <div class="col b-l bg-auto no-border-xs">
+              <div class="wrapper-md">
+                <div class="gm-table">
+                  <div class="gm-table-tr">
+                      <!-- chosen -->
+                      <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                      <label class="gm-label">项目1</label>
+                      <div class="chosen-container chosen-container-single onechosen-container" style="width:150px;height: 34px;" title="">
+                          <a class="chosen-single chosen-default" ng-click="oneSingle()">
+                              <span ng-show="onepleaseSelect">请选择</span>
+                              <span ng-show="onedgner">{{user.oneProjectname}}</span>
+                              <div>
+                                  <b></b>
+                              </div>
+                          </a>
+                          <div class="chosen-drop" ng-show="onechosenDrop">
+                              <div class="chosen-search">
+                                  <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.oneName" ng-change="oneChange()"/>
+                              </div>
+                              <ul class="chosen-results">
+                                  <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="oneProject($index)">{{types.projectName}}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">项目2</label>
+                      <div class="chosen-container chosen-container-single twochosen-container" style="width:150px;height: 34px;" title="">
+                          <a class="chosen-single chosen-default" ng-click="twoSingle()">
+                              <span ng-show="twopleaseSelect">请选择</span>
+                              <span ng-show="twodgner">{{user.twoProjectName}}</span>
+                              <div>
+                                  <b></b>
+                              </div>
+                          </a>
+                          <div class="chosen-drop" ng-show="twochosenDrop">
+                              <div class="chosen-search">
+                                  <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.desName" ng-change="designerChange()"/>
+                              </div>
+                              <ul class="chosen-results">
+                                  <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="twoProject($index)">{{types.projectName}}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">项目3</label>
+                      <div class="chosen-container chosen-container-single threechosen-container" style="width:150px;height: 34px;" title="">
+                          <a class="chosen-single chosen-default" ng-click="threeSingle()">
+                              <span ng-show="threepleaseSelect">请选择</span>
+                              <span ng-show="threedgner">{{user.threeProjectName}}</span>
+                              <div>
+                                  <b></b>
+                              </div>
+                          </a>
+                          <div class="chosen-drop" ng-show="threechosenDrop">
+                              <div class="chosen-search">
+                                  <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.desName" ng-change="designerChange()"/>
+                              </div>
+                              <ul class="chosen-results">
+                                  <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="threeProject($index)">{{types.projectName}}</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="gm-table">
+                    <div class="gm-table-tr" style="width: 340px;">
+                        <label class="gm-label">特色项目名称</label>
+                        <input style="width: 320px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入特色项目名称" ng-model="user.projectremark" required/>
+                    </div>
+                    <div class="gm-table-tr">
+                        <label class="gm-label">自定义金额(元)</label>
+                        <input id="inp1" style="width: 150px;" type="number" step="1" min="1" class="form-control input-sm w-sm inline m-r" placeholder="输入金额" ng-change="Ismoneycorrect()"  ng-model="user.salePrice" required/>
+                    </div>
+                </div>
+                <div class="gm-table">
+                    <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                        <button class="btn btn-bolting ntr sub-bttn" ng-disabled='form.$invalid' ng-click="projectSub()">提交</button>
+                    </div>
+                </div>
+                <!-- tasks -->
+                <!-- / tasks -->
+              </div>
+        </div>
+        <!-- / content col -->
+      </form>
+      </div>
+    </div>

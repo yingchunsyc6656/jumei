@@ -1,0 +1,40 @@
+<style itemscope>
+  .text-primary{
+    display: inline-block;
+    width: 30%;
+    height: 34px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #5488F8;
+    padding: 6px 0px;
+  }
+</style>
+<div class="container w-xl w-auto-xs m-tr box-radius" ng-controller="ForgotPwdController" ng-init="app.settings.container = false;">
+  <a href class="block m-t text-center">
+    <img ng-src="{{app.image}}" width="99px" height="99px"/>
+  </a>
+  <div class="m-b-lg">
+    <form name="form" class="form-validation">
+      <div class="text-danger wrapper text-center" ng-show="authError">
+        {{authError}}
+      </div>
+      <div class="list-group list-group-sm">
+        <div class="list-group-item m-t">
+          <input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required>
+        </div>
+        <div class="list-group-item">
+          <input type="password" placeholder="再次输入密码" class="form-control no-border" ng-model="user.secPassword" required>
+        </div>
+        <div class="list-group-item m-t">
+          <input type="phone" placeholder="手机号" class="form-control no-border" ng-model="user.phone" required>
+        </div>
+        <div class="list-group-item">
+          <input type="text" placeholder="验证码" class="form-control no-border" style="width:65%;display:inline-block;float: left;" ng-model="user.authCode" required>
+          <span style="cursor: pointer;" ng-click="sendCode()" ng-class="{false: 'inactive'}[disable]" class="text-primary" style="width:35%;">{{codeMsg}}</span>
+        </div>
+      </div>
+      <button type="submit" ng-disabled='form.$invalid' class="btn btn-lg btn-primary btn-block"  ng-click="forgotpwd()" >更改密码</button>
+    </form>
+  </div>
+</div>

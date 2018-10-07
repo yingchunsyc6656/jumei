@@ -1,0 +1,45 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">店铺转账</h1>
+</div>
+<div class="wrapper-md" ng-controller="storeBoxController">
+    <div class="panel panel-default" ng-repeat="bench in workbenchList">
+        <div class="panel-heading financial-order-head">
+            <div style="width:50%;display: inline-block;float: left;">
+                <span class="financical-order-time shop-transfer-name">店家名称：<span>{{bench.storeName}}</span></span>
+                <span class="financical-order-money shop-transfer-money">转账金额：<span style="color:red;" increment-number incnum="bench.transferAccount"></span></span>
+            </div>
+            <div class="financical-order-conf" ng-if="bench.orderStatus=='7'">
+                <a class="financical-order-take shop-transfer-confirm" ng-if="bench.storeExpire=='2'">过期</a>
+                <a class="financical-order-take shop-transfer-confirm" ng-if="bench.storeStatus=='2'">失效</a>
+                <a class="financical-order-take shop-transfer-confirm" ng-href="#/app/business/transfer?orderNo={{bench.orderNo}}" ng-if="bench.storeExpire=='1' && bench.storeStatus=='1'"><i></i>确认转账</a>
+            </div>
+            <div class="financical-order-conf" ng-if="bench.orderStatus=='8'">
+                <a class="financical-order-check" ng-href="#/app/business/transferImg?orderNo={{bench.orderNo}}"><i></i>查看</a>
+                <a class="financical-order-take shop-transfer-confirm" style="margin-left: 8px;">转账完成</a>
+            </div>
+            <div class="financical-order-conf" ng-if="bench.orderStatus=='10'">
+                <a class="financical-order-take shop-transfer-confirm">等待确认</a>
+            </div>
+        </div>
+        <div class="panel-body b-b b-light">
+            <div class="gm-table" style="margin-bottom: 0px;">
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户姓名：<span style="color:#333;font-size:16px;">{{bench.accreditName}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">咨询负责人：<span style="color:#333;font-size:16px;">{{bench.sourcemanName}}</span></label>
+                </div>
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户账号：<span style="color:#333;font-size:16px;">{{bench.accreditBanknumber}}</span></label>
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">手机号：<span style="color:#333;font-size:16px;">{{bench.sourcemanPhone}}</span></label>
+                </div>
+                <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">开户地址：<span style="color:#333;font-size:16px;">{{bench.depositbankAddress}}</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gm-table">
+        <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+            <button style="margin-top:0px;" class="btn btn-bolting" style="margin-left: 25px;" ng-click="loadingMore()">{{loadingText}}</button>
+        </div>
+    </div>
+</div>

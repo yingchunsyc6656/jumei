@@ -1,0 +1,217 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">店铺名单</h1>
+</div>
+<div class="wrapper-md" ng-controller="shopListController">
+    <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+        <!-- <div style="overflow:hidden;width:900px;top:50px;" class="modal-dialog modal-width-664"> -->
+            <!-- 失效弹窗start -->
+            <div ng-show="Isoperation">
+                <div style="overflow:hidden;width:460px;top:200px;" class="modal-dialog modal-width-664">
+                    <div class="wrapper-md">
+                        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                        <form name="form" class="form-validation" id="formTable">
+                            <div class="col b-l bg-auto no-border-xs">
+                            <div class="wrapper-md">
+                                <p style="text-align:center;color:#5488f8;font-size:22px;">确定要失效吗？</p>
+                                <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                            <!-- 请确认手术是否完成并且拍摄照片 -->
+                                </div>
+                                <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="loseefficacy($index)">确认</button>
+                                <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 失效弹窗end -->
+            <!-- 编辑店铺start -->
+            <div ng-show="Iseditshoplist" style="overflow:hidden;">
+                <div style="overflow:hidden;width:900px;top:50px;" class="modal-dialog modal-width-664">
+                <div class="wrapper-md" style="overflow:hidden;">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                        <!-- / content col -->
+                        <form name="form" class="form-validation" id="formTable1" class="form-validation ng-valid-required ng-dirty ng-valid-parse ng-invalid ng-invalid-pattern">
+                        <div class="col b-l bg-auto no-border-xs">
+                            <div class="wrapper-md">
+                                    <div >
+                                        <h2 style="font-size:22px;text-align:center;color:#5488f8">修改信息</h2>
+                                    </div>
+                                <div class="wrapper-md">
+                                        <div style="background-color: #fff;" class="wrapper-md">
+                                            <div class="text-danger wrapper text-center">
+                                                {{editError}}
+                                            </div>
+                                            <form name="form" class="form-validation">
+                                            <div class="gm-table">
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">店名</label>
+                                                    <input style="cursor: not-allowed;" disabled="disabled"
+                                                    type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.storeName" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">地址</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.storeAddress" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">法人代表</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.lealpersonName" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">法人手机号</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.lealpersonPhone" placeholder="请输入" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" required/>
+                                                </div>
+                                            </div>
+                                            <div class="gm-table">
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">授权开户人姓名</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.accreditName" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">开户银行地址</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.depositbankAddress" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">授权人开户账号</label>
+                                                    <input type="text" class="form-control input-sm w-lg inline m-r bank-numer" ng-model="store.accreditBanknumber" ng-change="bankCheck(store)" placeholder="请输入" required/>
+                                                </div>
+                                            </div>
+                                            <div class="gm-table">
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">咨询负责人</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.sourcemanName" placeholder="请输入" required/>
+                                                </div>
+                                                <div class="gm-table-tr">
+                                                    <label class="gm-label">电话</label>
+                                                    <input type="text" class="form-control input-sm w-sm inline m-r" ng-model="store.sourcemanPhone" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" placeholder="请输入" required/>
+                                                </div>
+                                            </div>
+                                
+                                            <div class="gm-table">
+                                                <div class="gm-table-tr" style="width: 150px;">
+                                                    <label class="gm-label">时间区间</label>
+                                                    <div>
+                                                        <div style="width: 150px;" class="input-group">
+                                                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" required/>
+                                                            <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="gm-table-tr" style="width: 150px;margin-left: 21px;">
+                                                    <label class="gm-label"></label>
+                                                    <div>
+                                                        <div style="width: 150px;" class="input-group">
+                                                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                                                            <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="gm-table-tr" style="margin-left: 21px;">
+                                                    <label class="gm-label">分成比率（百分比）</label>
+                                                    <input type="text" class="form-control input-sm w-pers inline" placeholder="请输入" ng-model="store.shareRate" ng-pattern="/^((?!0)\d{1,2}|100)$/" required/><span class="pay-yifang">支付给乙方</span>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                    <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="updateStoreClick()">确认修改</button>
+                                    <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        <!-- / content col -->
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- 编辑店铺end -->
+    </div>
+    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+        <div class="col b-l bg-auto no-border-xs">
+                <div class="wrapper-md">
+                    <div class="gm-table">
+                        <div class="gm-table-tr">
+                            <label class="gm-label">搜索</label>
+                            <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="名称或负责人" ng-model="user.queryData" required/>
+                        </div>
+                        <div class="gm-table-tr">
+                            <label class="gm-label">时间区间</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="gm-table-tr">
+                            <label class="gm-label"></label>
+                            <div>
+                                <div class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gm-table-tr" style="width: 190px;">
+                            <button class="btn btn-bolting ntr" ng-click="searchMsg()">筛选</button>
+                        </div>
+                    </div>
+                    <div ng-show="noTable">
+                        <p class="noMessage">暂无此人客户名单信息</p>
+                    </div>
+                    <div class="wrapper-md" ng-show="queryResut" style="padding: 15px 0px 0px 0px;">
+                        <div class="panel panel-default panel-bg">
+                            <div class="table-responsive">
+                                <table class="table table-striped m-b-none">
+                                    <thead>
+                                    <tr>
+                                    <th  style="width:12%">店铺名称</th>
+                                    <th  style="width:21%">区域</th>
+                                    <th  style="width:12%">店家代表</th>
+                                    <th  style="width:14%">咨询负责人</th>
+                                    <th  style="width:15%">电话</th>
+                                    <th  style="width:18%">签约时间</th>
+                                    <th  style="width:8%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="roll in rollList track by $index">
+                                        <td>{{roll.storeName}}</td>
+                                        <td>{{roll.storeAddress}}</td>
+                                        <td>{{roll.lealpersonName}}</td>
+                                        <td>{{roll.sourcemanName}}</td>
+                                        <td>{{roll.sourcemanPhone}}</td>
+                                        <td>{{roll.durationDate}}</td>
+                                        <td>
+                                        <div class="label-div1">
+                                            <span class="first-span">
+                                                <a ng-href="" ng-click="edituser($index)">编辑</a>
+                                            </span>
+                                            <span class="second-span">
+                                                <a ng-if="roll.storeStatus=='1'" href="" ng-click="deluser($index)">失效</a>
+                                                <a ng-if="roll.storeStatus=='2'" href="" ng-click="activeuser($index)">激活</a>
+                                            </span>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>

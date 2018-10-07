@@ -1,0 +1,118 @@
+<!--开始手术-->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">工作台/手术中</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading financial-order-head">
+            <div style="width:50%;display: inline-block;float: left;">
+                <span class="financical-order-time">2018-12-12 3:00</span>
+            </div>
+            <div class="financical-order-right nurse-order-right">
+                <a class="financical-order-del" href="">手术知情同意书</a>
+                <a style="margin-right:0px;" class="financical-order-take" ng-href="#/app/financical/gather"><i></i>注射知情书</a>
+            </div>
+        </div>
+        <div class="panel-body b-b b-light" ng-controller="ImgCropCtrl">
+            <div class="gm-table" style="margin-bottom: 0px;height:40px;">
+                <div style="margin-bottom: 0px;height:auto;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">顾客姓名：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                </div>
+            </div>
+            <div class="gm-table" style="margin-bottom: 0px;height:40px;">
+                <div style="margin-bottom: 0px;height:auto;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">设计师：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                </div>
+                <div style="margin-bottom: 0px;height:auto;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">场外：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                </div>
+                <div style="margin-bottom: 0px;height:auto;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">医生：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                </div>
+                <div style="margin-bottom: 0px;height:auto;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">护士：<span style="color:#333;font-size:16px;">徐驰</span></label>
+                </div>
+            </div>
+            <div class="gm-table" style="margin-bottom: 0px;height:40px;">
+                <div style="margin-bottom: 0px;height:auto;width:40%;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">项目名称：<span style="color:#333;font-size:16px;">针剂注射 玻尿酸 海威/除皱项目</span></label>
+                </div>
+            </div>
+            <div class="gm-table" style="margin-bottom: 0px;height:40px;">
+                <div style="margin-bottom: 0px;height:auto;width:40%;" class="gm-table-tr">
+                    <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">材料：<span style="color:#333;font-size:16px;">20根大v线+100根4s+0.5恒力+4支海威1ml</span></label>
+                </div>
+            </div>
+            <div style="margin-bottom: 0px;overflow: hiddden;">
+                <div style="height:213px;width: 50%;float: left;" class="gm-table">
+                    <div style="height:auto;position: relative;" class="gm-table-tr">
+                        <label style="color: #999;font-size:16px;" class="gm-label">术前照片</label>
+                        <label class="operate-img" for="fileInput"></label>
+                        <input id="fileInput" class="upload-file-hidden" type="file">
+                        <div class="col pre-img">
+                            <div style="width:150px;height:150px;" class="inline bg-white wrapper-sm b-a">
+                                <div class="bg-light" style="height:130px">
+                                    <img-crop class="ng-isolate-scope" image="myImage" result-image="myCroppedImage" result-image-size="160" area-type="square"></img-crop>
+                                    <img class="appear-img-right" ng-src="{{myCroppedImage}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:213px;width: 50%;float: left;" class="gm-table">
+                    <div style="height:auto;position: relative;" class="gm-table-tr">
+                        <label style="color: #999;font-size:16px;" class="gm-label">术后照片</label>
+                        <label class="operate-img" for="fileInput"></label>
+                        <input id="fileInput" class="upload-file-hidden" type="file">
+                        <div class="col pre-img">
+                            <div style="width:150px;height:150px;" class="inline bg-white wrapper-sm b-a">
+                                <div class="bg-light" style="height:130px">
+                                    <img-crop class="ng-isolate-scope" image="myImage" result-image="myCroppedImage" result-image-size="160" area-type="square"></img-crop>
+                                    <img class="appear-img-right" ng-src="{{myCroppedImage}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <!--<label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">咨询负责人：<span style="color:#333;font-size:16px;">旺旺</span></label>-->
+                <!--<label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">咨询负责人：<span style="color:#333;font-size:16px;">旺旺</span></label>-->
+                <!--<div style="width:20%;margin-bottom: 0px;" class="gm-table-tr">-->
+                    <!--<label class="gm-label mypro-add-time"></label>-->
+                    <!--<label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">场外：<span style="color:#333;font-size:16px;">晓晓</span></label>-->
+                <!--</div>-->
+                <!--<div style="width:20%;margin-bottom: 0px;" class="gm-table-tr">-->
+                    <!--<label class="gm-label mypro-add-time"></label>-->
+                    <!--<label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">医生：<span style="color:#333;font-size:16px;">丽丽 王明珠</span></label>-->
+                <!--</div>-->
+                <!--<div style="width:20%;" class="gm-table-tr">-->
+                    <!--<label class="gm-label mypro-add-time"></label>-->
+                    <!--<label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">医生：<span style="color:#333;font-size:16px;">丽丽 王明珠</span></label>-->
+                <!--</div>-->
+
+            <!--<div style="height:213px;" class="gm-table">-->
+                <!--<div style="height:auto;position: relative;" class="gm-table-tr">-->
+                    <!--<label class="gm-label">转账截图</label>-->
+                    <!--<label class="upload-img" for="fileInput"></label>-->
+                    <!--<input id="fileInput" class="upload-file-hidden" type="file">-->
+                    <!--<div class="col pre-img">-->
+                        <!--<div style="width:150px;height:150px;" class="inline bg-white wrapper-sm b-a">-->
+                            <!--<div class="bg-light" style="height:130px">-->
+                                <!--<img-crop class="ng-isolate-scope" image="myImage" result-image="myCroppedImage" result-image-size="160" area-type="square"></img-crop>-->
+                                <!--<img class="appear-img-right" ng-src="{{myCroppedImage}}" />-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="des-additem-btn">
+                <button style="margin-right: 50px;" class="btn btn-primary" ng-click="ok()">完成手术</button>
+                <button class="btn btn-default" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

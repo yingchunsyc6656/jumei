@@ -1,0 +1,955 @@
+<div class="aside-wrap">
+  <div class="navi-wrap">
+    <!-- nav -->
+    <nav ui-nav class="navi" ng-controller="navController">
+    <ul ng-if="sliberTab.station!=='0' && sliberTab.department!=='0'" class="nav bg-nav">
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='1'" style="padding:0px 12px;">
+          <a class="all-desk"  ui-sref="app.home" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="首页-工作台">首页-工作台</span>
+          </a>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='1'" ng-class="{active:$state.includes('app.table')}">
+          <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>预约管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="预约管理">预约管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.table.roll">
+                <span translate="预约名单">预约名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.table.added">
+                <span translate="新增预约">新增预约</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='1'" ng-class="{active:$state.includes('app.form')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span translate="客户管理">客户管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="客户管理">客户管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.form.user">
+                <span translate="客户名单">客户名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.form.adduser">
+                <span translate="新增客户">新增客户</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='1'" ng-class="{active:$state.includes('app.page')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.page.personal">
+                <span translate="接待记录">接待记录</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.page.editor">
+                <span translate="资料修改">资料修改</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师工作台 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='2'" style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.designer" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="设计师-工作台">设计师工作台</span>
+          </a>
+        </li>
+        <!-- 设计师项目管理 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='2'" ng-class="{active:$state.includes('app.stylist')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>项目管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="项目管理">项目管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.stylist.addpro">
+                <span translate="添加项目">添加项目</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.stylist.mypro">
+                <span translate="我的项目">我的项目</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师我的客户 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='2'" ng-class="{active:$state.includes('app.mycustom')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span>我的客户</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="我的客户">我的客户</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.mycustom.consumer">
+                <span translate="我的客户">我的客户</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师个人设置 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='2'" ng-class="{active:$state.includes('app.designerset')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.designerset.desreceive">
+                <span translate="接待记录">接待记录</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.designerset.deseditor">
+                <span translate="资料修改">资料修改</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.designerset.backorder">
+                <span translate="退回订单">退回订单</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务工作台 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='3'" style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.financial" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="财务-工作台">财务-工作台</span>
+          </a>
+        </li>
+        <!-- 财务仓库管理 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='6'" ng-class="{active:$state.includes('app.room')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span translate="仓库管理">仓库管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.export">
+                <span translate="新增入库">新增入库</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.warehouse">
+                <span translate="仓库库存">仓库库存</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.records">
+                <span translate="出入记录">出入记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务商家管理出纳 -->
+        <li ng-if="sliberTab.station=='2' && sliberTab.department=='3'" ng-class="{active:$state.includes('app.business')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span translate="商家管理">商家管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="商家管理">商家管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.business.translist">
+                <span translate="店铺转账">店铺转账</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务个人设置 -->
+        <!-- 财务个人设置收银 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='3'" ng-class="{active:$state.includes('app.moneyperson')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.moneyperson.editor">
+                <span translate="资料修改">资料修改</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.moneyperson.record">
+                <span translate="收款记录">收款记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务仓管 -->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='6'" ng-class="{active:$state.includes('app.moneyperson')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.page.editor">
+                  <span translate="资料修改">资料修改</span>
+                </a>
+              </li>
+          </ul>
+        </li>
+        <!-- 财务个人设置出纳 -->
+        <li ng-if="sliberTab.station=='2' && sliberTab.department=='3'" ng-class="{active:$state.includes('app.moneyperson')}">
+            <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+              <i class="glyphicon icon">
+                <img src="img/image/img_me.png" width="22px" height="22px"/>
+              </i>
+              <span translate="个人设置">个人设置</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li class="nav-sub-header">
+                <a href>
+                  <span translate="个人设置">个人设置</span>
+                </a>
+              </li>
+              <li ng-if="sliberTab.station=='2' && sliberTab.department=='3'" ui-sref-active="active">
+                <a ui-sref="app.moneyperson.confirm">
+                  <span translate="对账确认">对账确认</span>
+                </a>
+              </li>
+              <li ng-if="sliberTab.station=='2' && sliberTab.department=='3'" ui-sref-active="active">
+                <a ui-sref="app.moneyperson.editor">
+                  <span translate="资料修改">资料修改</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <!--护士工作台-->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='4'" style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.nurse" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="护士-工作台">护士工作台</span>
+          </a>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='4'" ng-class="{active:$state.includes('app.nursepre')}">
+          <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>预约管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="预约管理">预约管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.nursepre.todaypre">
+                <span translate="今日预约名单">今日预约名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.nursepre.futurelist">
+                  <span translate="未来订单">未来订单</span>
+                </a>
+              </li>
+            <li ui-sref-active="active" ng-show="false">
+              <a ui-sref="app.nursepre.fdetail">
+                <span translate="待处理的预约">待处理的预约</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='4'" ng-class="{active:$state.includes('app.nurseset')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.nurseset.seteditor">
+                <span translate="资料修改">资料修改</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!--客服工作台-->
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='5'" style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.service" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="客服-工作台">客服工作台</span>
+          </a>
+        </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='5'" ng-class="{active:$state.includes('app.serviceshop')}">
+            <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+              <i class="glyphicon icon">
+                <img src="img/image/img_me.png" width="22px" height="22px"/>
+              </i>
+              <span translate="商家管理">商家管理</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li ui-sref-active="active">
+                <a ui-sref="app.serviceshop.list">
+                  <span translate="店铺名单">店铺名单</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.serviceshop.shopman">
+                  <span translate="添加店家">添加店家</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='5'" ng-class="{active:$state.includes('app.servicemanager')}">
+            <a href class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <b class="label bg-primary pull-right"></b>
+              <i class="glyphicon icon">
+                <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+              </i>
+              <span>客户管理</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li class="nav-sub-header">
+                <a href>
+                  <span translate="完善客户信息">完善客户信息</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.servicemanager.pmsg">
+                  <span translate="完善客户信息">完善客户信息</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li ng-if="sliberTab.station=='1' && sliberTab.department=='5'" ng-class="{active:$state.includes('app.serviceset')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.serviceset.editservice">
+                <span translate="资料修改">资料修改</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.serviceset.handle">
+                <span translate="操作记录">操作记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+    </ul>
+ 
+
+
+
+    <!-- 超级管理员 -->
+    <ul ng-if="sliberTab.station=='0' && sliberTab.department=='0'" class="nav bg-nav">
+        <li style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.home" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="首页-工作台">首页-工作台</span>
+          </a>
+        </li>
+        <li ng-class="{active:$state.includes('app.table')}">
+          <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>预约管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="预约管理">预约管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.table.roll">
+                <span translate="预约名单">预约名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.table.added">
+                <span translate="新增预约">新增预约</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-class="{active:$state.includes('app.form')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span translate="客户管理">客户管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="客户管理">客户管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.form.user">
+                <span translate="客户名单">客户名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.form.adduser">
+                <span translate="新增客户">新增客户</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li ng-class="{active:$state.includes('app.page')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.page.personal">
+                <span translate="接待记录">接待记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师工作台 -->
+        <li style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.designer" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="设计师-工作台">设计师工作台</span>
+          </a>
+        </li>
+        <!-- 设计师项目管理 -->
+        <li ng-class="{active:$state.includes('app.stylist')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>项目管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="项目管理">项目管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.stylist.addpro">
+                <span translate="添加项目">添加项目</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.stylist.mypro">
+                <span translate="我的项目">我的项目</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师我的客户 -->
+        <li ng-class="{active:$state.includes('app.mycustom')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span>我的客户</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="我的客户">我的客户</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.mycustom.consumer">
+                <span translate="我的客户">我的客户</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 设计师个人设置 -->
+        <li ng-class="{active:$state.includes('app.designerset')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.designerset.desreceive">
+                <span translate="接待记录">接待记录</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.designerset.backorder">
+                <span translate="退回订单">退回订单</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务工作台 -->
+        <li style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.financial" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="财务-工作台">财务-工作台</span>
+          </a>
+        </li>
+        <!-- 财务仓库管理 -->
+        <li ng-class="{active:$state.includes('app.room')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span translate="仓库管理">仓库管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.export">
+                <span translate="新增入库">新增入库</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.warehouse">
+                <span translate="仓库库存">仓库库存</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.room.records">
+                <span translate="出入记录">出入记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务商家管理 -->
+        <li ng-class="{active:$state.includes('app.business')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+            </i>
+            <span translate="商家管理">商家管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="商家管理">商家管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.business.translist">
+                <span translate="店铺转账">店铺转账</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 财务个人设置 -->
+        <li ng-class="{active:$state.includes('app.moneyperson')}">
+            <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+              <i class="glyphicon icon">
+                <img src="img/image/img_me.png" width="22px" height="22px"/>
+              </i>
+              <span translate="个人设置">个人设置</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li class="nav-sub-header">
+                <a href>
+                  <span translate="个人设置">个人设置</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.moneyperson.confirm">
+                  <span translate="对账确认">对账确认</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.moneyperson.reconciliation">
+                  <span translate="历史对账">历史对账</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.moneyperson.record">
+                  <span translate="收款记录">收款记录</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <!--护士工作台-->
+        <li style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.nurse" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="护士-工作台">护士工作台</span>
+          </a>
+        </li>
+        <li ng-class="{active:$state.includes('app.nursepre')}">
+          <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <b class="label bg-primary pull-right"></b>
+            <i class="glyphicon icon">
+              <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+            </i>
+            <span>预约管理</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>
+                <span translate="预约管理">预约管理</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.nursepre.todaypre">
+                <span translate="今日预约名单">今日预约名单</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.nursepre.futurelist">
+                  <span translate="未来订单">未来订单</span>
+                </a>
+              </li>
+            <li ui-sref-active="active" ng-show="false">
+              <a ui-sref="app.nursepre.fdetail">
+                <span translate="待处理的预约">待处理的预约</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!--客服工作台-->
+        <li style="padding:0px 12px;">
+          <a class="all-desk" ui-sref="app.service" ui-sref-opts="{reload:true}" style="background-color: #EDEDED;border-radius:21.5px;padding: 10px 12px;">
+            <i class="glyphicon icon">
+              <img src="img/image/img_home.png" width="22px" height="22px"/>
+            </i>
+            <span translate="客服-工作台">客服工作台</span>
+          </a>
+        </li>
+        <li ng-class="{active:$state.includes('app.serviceshop')}">
+            <a href class="auto">
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+              <i class="glyphicon icon">
+                <img src="img/image/img_yuyue.png" width="22px" height="22px"/>
+              </i>
+              <span translate="商家管理">商家管理</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li ui-sref-active="active">
+                <a ui-sref="app.serviceshop.list">
+                  <span translate="店铺名单">店铺名单</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.serviceshop.shopman">
+                  <span translate="添加店家">添加店家</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li ng-class="{active:$state.includes('app.servicemanager')}">
+            <a href class="auto">
+              <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+              </span>
+              <b class="label bg-primary pull-right"></b>
+              <i class="glyphicon icon">
+                <img src="img/image/img_kehu.png" width="22px" height="22px"/>
+              </i>
+              <span>客户管理</span>
+            </a>
+            <ul class="nav nav-sub dk">
+              <li class="nav-sub-header">
+                <a href>
+                  <span translate="完善客户信息">完善客户信息</span>
+                </a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="app.servicemanager.pmsg">
+                  <span translate="完善客户信息">完善客户信息</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li ng-class="{active:$state.includes('app.serviceset')}">
+          <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+            <i class="glyphicon icon">
+              <img src="img/image/img_me.png" width="22px" height="22px"/>
+            </i>
+            <span translate="个人设置">个人设置</span>
+          </a>
+          <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+              <a href>   
+                <span translate="个人设置">个人设置</span>
+              </a>
+            </li>
+            <li ui-sref-active="active">
+              <a ui-sref="app.serviceset.handle">
+                <span translate="操作记录">操作记录</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      <li ng-class="{active:$state.includes('app.serviceset')}">
+        <a href class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+          <i class="glyphicon icon">
+            <img src="img/image/img_me.png" width="22px" height="22px"/>
+          </i>
+          <span translate="管理员设置">管理员设置</span>
+        </a>
+        <ul class="nav nav-sub dk">
+          <li class="nav-sub-header">
+            <a href>
+              <span translate="管理员设置">管理员设置</span>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="app.serviceset.editservice">
+              <span translate="资料修改">资料修改</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    </nav>
+    <!-- nav -->
+  </div>
+</div>

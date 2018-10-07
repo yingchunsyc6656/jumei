@@ -1,0 +1,410 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+  <!-- main -->
+  <div class="col" ng-controller="HomesController">
+    <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" modal-window="" size="0" index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+      <div class="modal-dialog modal-width-664" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg','modal-width-664':'w664'}">
+        <div class="wrapper-md ng-scope">
+          <div class="wrapper-table">
+            <tabset class="nav-tabs-alt wih">
+              <tab>
+                <tab-heading>
+                  <i class="glyphicon text-md text-col wrapper-sm">
+                    预约详情
+                  </i>
+                </tab-heading>
+                <div class="wrapper-md">
+                  <div class="wrapper-table">
+                    <ul>
+                      <li>
+                        <label>顾客姓名</label>
+                        <div>{{aboutList.customername}}</div>
+                      </li>
+                      <li>
+                        <label>订单编号</label>
+                        <div>{{aboutList.orderno}}</div>
+                      </li>
+                      <li>
+                        <label>电话</label>
+                        <div>{{aboutList.phone}}</div>
+                      </li>
+                      <li>
+                        <label>设计师</label>
+                        <div>{{aboutList.desigername}}</div>
+                      </li>
+                      <li>
+                        <label>来源</label>
+                        <div>{{aboutList.sourcestore}}</div>
+                      </li>
+                      <li>
+                        <label>消费金额</label>
+                        <div>{{aboutList.costmoney}}</div>
+                      </li>
+                      <li>
+                        <label>预约时间</label>
+                        <div>{{aboutList.appointmenttime}}</div>
+                      </li>
+                      <li>
+                        <label>到店时间</label>
+                        <div>{{aboutList.arrivestoredate}}</div>
+                      </li>
+                      <li>
+                        <label>当前状态</label>
+                        <div>{{aboutList.orderstatus}}</div>
+                      </li>
+                      <li>
+                        <label>预约项目</label>
+                        <div>{{aboutList.projectremark}}</div>
+                      </li>
+                    </ul>
+                    <div class="dal-footer">
+                      <button class="btn-fot" ng-click="goBack()">返回</button>
+                    </div>
+                  </div>
+                </div>
+              </tab>
+              <tab>
+                <tab-heading>
+                  <i class="glyphicon text-md text-col wrapper-sm">
+                    客户详情
+                  </i>
+                </tab-heading>
+                <div class="wrapper-md">
+                  <div class="wrapper-table">
+                    <ul>
+                      <li>
+                        <label>顾客姓名</label>
+                        <div>{{clientDetails.customername}}</div>
+                      </li>
+                      <li>
+                        <label>电话</label>
+                        <div>{{clientDetails.phone}}</div>
+                      </li>
+                      <li>
+                        <label>生日</label>
+                        <div>{{clientDetails.binthday}}</div>
+                      </li>
+                      <li>
+                        <label>性别</label>
+                        <div>{{clientDetails.sex}}</div>
+                      </li>
+                      <li>
+                        <label>出生地</label>
+                        <div>{{clientDetails.birthplace}}</div>
+                      </li>
+                      <li>
+                        <label>常住地</label>
+                        <div>{{clientDetails.permanentplace}}</div>
+                      </li>
+                      <li>
+                        <label>常见病史</label>
+                        <div>{{clientDetails.commonhistory}}</div>
+                      </li>
+                      <li>
+                        <label>其他传染 性疾病</label>
+                        <div>{{clientDetails.othercontagion}}</div>
+                      </li>
+                      <li>
+                        <label>其他传染 性疾病</label>
+                        <div>{{clientDetails.medicinehistory}}</div>
+                      </li>
+                    </ul>
+                    <div class="dal-footer">
+                      <button class="btn-fot" ng-click="cancel()">返回</button>
+                    </div>
+                  </div>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div><!-- end ngRepeat: tab in tabs -->
+    </div>
+    <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}" modal-window="" size="0" index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="shopDialog">
+      <div class="modal-dialog modal-width-664" ng-class="{'modal-sm': size == 'sm', 'modal-lg': size == 'lg','modal-width-664':'w664'}">
+        <div class="wrapper-md ng-scope">
+          <div class="wrapper-table">
+            <div class="modal-header">
+              <h3 class="modal-title hed">到店认证</h3>
+            </div>
+            <div class="modal-body" id="{{orderno}}">
+              <div class="modal-cont">
+                <div class="text-danger wrapper text-center">
+                  {{authError}}
+                </div>
+                <div class="modal-col">
+                  <label>姓名：</label>
+                  <p ng-bind="customerName"></p>
+                </div>
+                <div class="modal-col">
+                  <label>预约时间：</label>
+                  <p ng-bind="appointmentDate"></p>
+                </div>
+                <div class="modal-col">
+                  <!-- chosen -->
+                  <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                  <label class="gm-label">服务人员：</label>
+                  <div class="chosen-container chosen-container-single" style="width: 150px;height: 34px;float: left;margin-top: 15px;" title="">
+                    <a class="chosen-single chosen-default" ng-click="chosenSingle()">
+                      <span ng-show="pleaseSelect">请选择</span>
+                      <span ng-show="dgner">{{designame}}</span>
+                      <div>
+                        <b></b>
+                      </div>
+                    </a>
+                    <div class="chosen-drop" ng-show="chosenDrop">
+                      <div class="chosen-search">
+                        <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="desName" ng-change="designerChange()"/>
+                      </div>
+                      <ul class="chosen-results">
+                        <li class="active-result" data-option-array-index="{{$index}}" id="{{roles.roleid}}" style="" ng-repeat="roles in roleQueryList track by $index" ng-click="roleClick($index)">{{roles.rolename}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" ng-click="storeCancel()">取消</button>
+              <button class="btn btn-primary" ng-click="ackOk()">确认到店</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- end ngRepeat: tab in tabs -->
+    </div>
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md" style="position:relative;">
+      <h1 class="m-n font-thin h3">工作台</h1>
+      <div class="refresh">
+          <i><img id="re-img" class="refresh-icon" src="img/image/refresh.png" width="100%" height="100%"/></i>
+          <b>刷新</b>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md"> <!--ng-controller="FlotChartDemoCtrl">-->
+      <!-- tasks -->
+      <div class="panel wrapper" style="margin-bottom:0;border: 0;padding: 15px 15px 0px 15px;">
+        <div class="row">
+          <div class="row-header">
+            <div class="header-top">
+              <p>咨询室状态&nbsp;&nbsp;<i class="l-hi">今日预约：</i><b>{{totalNumber}}<i>人</i></b></p>
+            </div>
+            <div class="row-header-list">
+              <ul>
+                <li ng-repeat="consult in consultingRoom">
+                  <div class="row-div">
+                    <div class="row-div-one" ng-if="consult.roomStatus=='2'">
+                      <div class="row-icon">
+                        <img src="img/image/img_ing_home.png" width="100%" height="100%" alt=""/>
+                      </div>
+                    </div>
+                    <div class="row-div-one" ng-if="consult.roomStatus=='1'">
+                      <div class="row-icon">
+                        <img src="img/image/img_ok_home.png" width="100%" height="100%" alt=""/>
+                      </div>
+                    </div>
+                    <div class="row-div-one" ng-if="consult.roomStatus=='3'">
+                      <div class="row-icon">
+                        <img src="img/image/img_no_home.png" width="100%" height="100%" alt=""/>
+                      </div>
+                    </div>
+                    <p class="row-icon-p0">{{consult.roomName}}（<b>{{consult.roomNumber}}</b>）</p>
+                    <p class="row-icon-p1">就诊医生：<b>{{consult.designerName}}</b></p>
+                    <p class="row-icon-p1" ng-if="consult.roomStatus!=='1'">服务：<b>{{consult.customerName}}</b></p>
+                    <p class="row-icon-p1" ng-if="consult.roomStatus=='1'">可预约</p>
+                  </div>
+                  <div class="row-line"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / tasks -->
+      <!-- tasks-->
+      <div class="row">
+        <div class="wrapper-md" style="padding: 15px 15px 0px 15px;" ng-show="rowMessage">
+          <div class="panel panel-default panel-bg">
+            <div class="def-relative">
+              <div class="panel-heading" style="width:75%;padding: 15px 0 0 15px;">
+                客户状态信息
+              </div>
+              <div class="panel-icon">
+                <a ng-href="#/app/table/added">
+                  <img src="img/image/img_add.png" width="100%" height="100%"/>
+                </a>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <div class="table-responsive" ng-show="noRecords">
+                <p class="noMessage">暂无此人预约名单信息</p>
+              </div>
+              <div ng-show="isRecords">
+                  <table class="table table-striped m-b-none" >
+                      <thead>
+                      <tr>
+                        <th  style="width:8%">姓名</th>
+                        <th  style="width:12%">电话</th>
+                        <th  style="width:23%">预约项目</th>
+                        <th  style="width:8%">设计师</th>
+
+                        <th  style="width:14%">预约时间</th>
+                        <th  style="width:14%">到店时间</th>
+                        <th  style="width:10%">状态</th>
+                        <th style="width: 11%;">操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="works in workList track by $index">
+                          <td>{{works.customerName}}</td>
+                          <td>{{works.customerPhone}}</td>
+                          <td>{{works.projectRemark}}</td>
+                          <td>{{works.designerName}}</td>
+                          <td>{{works.appointmentTime}}</td>
+                          <td ng-if="works.arrivestoreDate!==null">{{works.arrivestoreDate}}</td>
+                          <td ng-if="works.arrivestoreDate==null">-</td>
+                          <td ng-if="works.orderStatus=='1'"><span class="label bg-warning" title="Disabled">已预约</span></td>
+                          <td ng-if="works.orderStatus=='2'"><span class="label bg-warning" title="Disabled">到店</span></td>
+                          <td ng-if="works.orderStatus=='3'"><span class="label bg-warning" title="Disabled">医生设计</span></td>
+                          <td ng-if="works.orderStatus=='4'"><span class="label bg-warning" title="Active">收钱完成</span></td>
+                          <td ng-if="works.orderStatus=='5'"><span class="label bg-warning" title="Active">手术中</span></td>
+                          <td ng-if="works.orderStatus=='6'"><span class="label bg-warning" title="Active">手术完成</span></td>
+                          <td ng-if="works.orderStatus=='7'"><span class="label bg-success" title="Suspended">客服确认</span></td>
+                          <td ng-if="works.orderStatus=='8'"><span class="label bg-success" title="Suspended">完成</span></td>
+                          <td ng-if="works.orderStatus=='9'"><span class="label bg-danger" title="Disabled">未完成</span></td>
+                          <td>
+                            <span class="first-span" ng-click="shopStore($index)" ng-if="works.isArrivestore=='1'"><a>到店</a></span>
+                            <span class="first-span" ng-click="triage($index)" ng-if="works.isArrivestore=='2'"><a>分诊</a></span>
+                            <span class="first-span" ng-if="works.isArrivestore=='3'"><a>正在接待中</a></span>
+                            <span class="second-span" ng-click="openRecordsId($index)"><a>详情</a></span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="workPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--近期预约状况-->
+        <div class="wrapper-md" style="padding: 15px 15px 0px 15px;" ng-show="triageWrapper">
+          <!-- tasks -->
+          <div style="width:100%;float: left;">
+            <div class="panel panel-default panel-bg">
+              <div class="wrapper-md">
+                <div>
+                  <div class="gm-table ft" style="height: 40px;border-bottom: 1px solid #E8E8E8;">
+                    <p style="font-size: 18px;line-height:40px;color: #4A4A4A;">分诊</p>
+                  </div>
+                  <div class="table-lit">
+                    <div class="table-ls">
+                      <ul>
+                        <li>
+                          <div class="ls-div0">预约单号</div>
+                          <div class="ls-div1">{{triagelist.orderNo}}</div>
+                          <div class="ls-div0">预约时间</div>
+                          <div class="ls-div1">{{triagelist.appointmentDate}}</div>
+                        </li>
+                        <li>
+                          <div class="ls-div0">姓名</div>
+                          <div class="ls-div1">{{triagelist.customerName}}</div>
+                          <div class="ls-div0">预约项目</div>
+                          <div class="ls-div1">{{triagelist.projectRemark}}</div>
+                        </li>
+                        <li>
+                          <div class="ls-div0">电话</div>
+                          <div class="ls-div1">{{triagelist.phone}}</div>
+                          <div class="ls-div0">预约设计师</div>
+                          <div class="ls-div1">{{triagelist.designerName}}</div>
+                        </li>
+                        <li>
+                          <div class="ls-div0">来源</div>
+                          <div class="ls-div1">{{triagelist.orderSource}}</div>
+                          <div class="ls-div0">是否麻醉</div>
+                          <div class="ls-div1" ng-if="triagelist.isAnesthesia=='0'">是</div>
+                          <div class="ls-div1" ng-if="triagelist.isAnesthesia=='1'">否</div>
+                        </li>
+                      </ul>
+                      <div class="ls-width">
+                        <div class="ls-table-btn">
+                          <div style="width: 150px;height: 34px;margin-top: 5px;float: left;margin-left: 15px;cursor: pointer;" ng-click="triageClick()">
+                            <div class="form-control m-b m-bg" style="position: relative;">
+                              <!-- chosen -->
+                              <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                              <div class="off-tr">
+                                <b></b>
+                              </div>
+                              <div value="" ng-show="triageId">{{triagerName}}</div>
+                              <ul id="off-ul" ng-show="triList">
+                                <li ng-repeat="rol in roleQueryList track by $index" ng-click="triagerfun($index)">{{rol.rolename}}</li>
+                              </ul>
+                            </div>
+                          </div>
+                          <button class="btn btn-bolting gm-btr" style="margin-top: 5px;float: right;" ng-click="submitReceive()">分诊</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="overflow:hidden;" class="wrapper-md" style="padding-top: 0px;">
+                    <div class="gm-table ft" style="height: 40px;border-bottom: 1px solid #E8E8E8;">
+                      <p style="font-size: 18px;line-height:40px;color: #4A4A4A;">预约记录&nbsp;&nbsp;<a ng-show="spread" style="color:#5488F8;font-weight:bold;" ng-click="openTableList(triagelist.customerId,triagelist.orderNo)">展开列表</a><a ng-show="retract" style="color:#5488F8;font-weight:bold;" ng-click="retractlist()">收起列表</a></p>
+                    </div>
+                    <div ng-show="noTable">
+                      <p class="noMessage">暂无近期预约信息</p>
+                    </div>
+                    <div ng-show="tabList">
+                      <table class="table table-striped m-b-none" >
+                        <thead>
+                          <tr>
+                            <th  style="width:20%">预约单号</th>
+                            <th  style="width:15%">预约项目</th>
+                            <th  style="width:14%">设计师</th>
+                            <th  style="width:15%">预约时间</th>
+                            <th  style="width:15%">到店时间</th>
+                            <th  style="width:21%">状态</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="triage in triageRecords">
+                          <td>{{triage.orderNo}}</td>
+                          <td>{{triage.projectRemark}}</td>
+                          <td>{{triage.designerName}}</td>
+                          <td>{{triage.appointmentTime}}</td>
+                          <td ng-if="triage.arrivestoreDate==null">-</td>
+                          <td ng-if="triage.arrivestoreDate!==null">{{triage.arrivestoreDate}}</td>
+                          <td ng-if="triage.orderStatus=='1'"><span class="label bg-warning" title="Disabled">已预约</span></td>
+                          <td ng-if="triage.orderStatus=='2'"><span class="label bg-warning" title="Disabled">到店</span></td>
+                          <td ng-if="triage.orderStatus=='3'"><span class="label bg-warning" title="Disabled">医生设计</span></td>
+                          <td ng-if="triage.orderStatus=='4'"><span class="label bg-warning" title="Active">收钱完成</span></td>
+                          <td ng-if="triage.orderStatus=='5'"><span class="label bg-warning" title="Active">确认收钱</span></td>
+                          <td ng-if="triage.orderStatus=='6'"><span class="label bg-warning" title="Active">手术中</span></td>
+                          <td ng-if="triage.orderStatus=='7'"><span class="label bg-success" title="Suspended">完成</span></td>
+                          <td ng-if="triage.orderStatus=='8'"><span class="label bg-danger" title="Disabled">未完成</span></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                      <div style="width: 100%;height: 50px;">
+                        <div jj-pager pager-info="detailPager" showpagenum="5" on-page-change="triagePage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- / tasks -->
+        </div>
+        <!--近期预约状况-->
+      </div>
+      <!-- / tasks -->
+    </div>
+  </div>
+  <!-- / main -->
+  <!-- 设计师工作台 -->
+</div>
+<!--modal-start-->
+
+<!--modal-end-->

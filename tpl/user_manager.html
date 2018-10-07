@@ -1,0 +1,222 @@
+<!--最大层-->
+<div ng-controller="UserManagerController">
+  <div ng-show="Isusermanager">
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">客户名单</h1>
+  </div>
+<div class="wrapper-md">
+      <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+        <div class="text-danger wrapper text-center">
+          {{authError}}
+        </div>
+        <!-- / content col -->
+        <div class="col b-l bg-auto no-border-xs">
+              <div class="wrapper-md">
+                <div class="gm-table">
+                  <div class="gm-table-tr">
+                    <label class="gm-label">姓名</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入姓名" ng-model="user.searchcustomername" required/>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">电话</label>
+                    <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入电话" ng-model="user.searchcustomerphone" required/>
+                  </div>
+                  <div class="gm-table-tr">
+                    <label class="gm-label">时间区间</label>
+                    <div>
+                      <div class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr">
+                      <label class="gm-label"></label>
+                      <div>
+                        <div class="input-group">
+                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="gm-table-tr" style="width: 190px;">
+                    <button class="btn btn-bolting ntr" ng-click="Screening()">筛选</button>
+                  </div>
+                </div>
+                <!-- tasks -->
+                <div class="table-responsive" ng-show="noTable">
+                  <p class="noMessage">暂无此人客户名单信息</p>
+                </div>
+                <div style="width:100%;float: left;" ng-show="queryResult">
+                  <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                    <div class="panel panel-default panel-bg">
+                      <div class="table-responsive">
+                        <table class="table table-striped m-b-none">
+                          <thead>
+                          <tr>
+                            <th  style="width:15%">会员编号</th>
+                            <th  style="width:11%">姓名</th>
+                            <th style="width:10%">性别</th>
+                            <th style="width:10%">生日</th>
+                            <th style="width:8%">婚否</th>
+                            <th  style="width:12%">电话</th>
+                            <th  style="width:15%">入会时间</th>
+                            <th  style="width:18%">操作</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="rolls in rollList track by $index">
+                              <td>{{rolls.customerid}}</td>
+                              <td>{{rolls.customername}}</td>
+                              <td>{{rolls.sex}}</td>
+                              <td>{{rolls.birthday}}</td>
+                              <td>{{rolls.marriage}}</td>
+                              <td>{{rolls.customerphone}}</td>
+                              <td>{{rolls.initiationtime}}</td>
+                              <td>
+                                <span class="first-span" style="padding-right:0px;"><a ng-click="edituser(rolls.customerid)">修改</a></span>
+                                <span class="second-span" style="padding-right:0px;"><a ng-href="#/app/form/historyorder?custoid={{rolls.customerid}}">历史订单</a></span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="cagPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- / tasks -->
+              </div>
+        </div>
+        <!-- / content col -->
+      </div>
+    </div>
+  </div>
+<!--资料修改页面开始-->
+  <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+  <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+    <div style="overflow:hidden;width:900px;top:0px;" class="modal-dialog modal-width-664">
+      <div ng-show="Isedituser">
+        <div class="wrapper-md">
+          <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+            <!-- / content col -->
+            <form name="form" class="form-validation" id="formTable">
+              <div class="col b-l bg-auto no-border-xs">
+                <div class="wrapper-md">
+                  <div class="text-danger wrapper text-center">
+                    {{modelauthError}}
+                  </div>
+                  <div class="gm-table">
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">姓名</label>
+                      <input type="text" class="form-control input-sm w-sm inline m-r customername" placeholder="输入关键词" ng-model="user.customername" ng-pattern="/^[\u4E00-\u9FA5]{2,4}$/" required/>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">电话</label>
+                      <input type="text" class="form-control input-sm w-sm inline m-r phone" placeholder="输入电话" ng-model="user.customerphone" ng-pattern="/^[1][3,5,7,8,9][0-9]{9}$/" required/>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">性别</label>
+                      <div style="width: 190px;" class="gm-table-trs">
+                        <div class="btn-group" ng-init="sex = '0'" ng-click="issex()">
+                          <label class="btn bts-info" ng-model="sex" btn-radio="'0'"><i class="fa fa-check text-active"></i>男</label>
+                          <label class="btn btn-bolt" ng-model="sex" btn-radio="'1'"><i class="fa fa-check text-active"></i> 女</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table">
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">身份证号</label>
+                      <input type="text" class="form-control input-sm w-sm inline m-r idno" placeholder="输入身份证号" ng-model="user.idno" ng-blur="Idno();" ng-pattern="/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/" required/>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">出生年月日</label>
+                      <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入关键词" ng-model="user.birthday" required/>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">婚姻状况</label>
+                      <div style="width: 190px;" class="gm-table-trs">
+                        <div class="btn-group" ng-click="ismarriage()" ng-init="marriage = '0'">
+                          <label class="btn bts-info" ng-model="marriage" btn-radio="'0'"><i class="fa fa-check text-active"></i>已婚</label>
+                          <label class="btn btn-bolt" ng-model="marriage" btn-radio="'1'"><i class="fa fa-check text-active"></i>未婚</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gm-table">
+                    <div style="width: 380px;" class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">出生地</label>
+                      <input style="width: 340px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="请输入出生地" ng-model="user.birthplace" required/>
+                    </div>
+                    <div class="gm-table-tr gm-table-trw">
+                      <label class="gm-label">常住地</label>
+                      <input style="width: 340px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="请输入常住地" ng-model="user.permanentplace" required/>
+                    </div>
+                  </div>
+                  <div style="width: 65%;" class="gm-table-tr gm-table-tr-fn">
+                    <label class="gm-label">常见疾病</label>
+                    <div class="usual-disease">
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox"  ng-model="checkBox[0].a" name="ckb" value="0"><i></i> 过敏史
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[1].a" name="ckb" value="1"><i></i> 疤痕史
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[2].a" name="ckb" value="2"><i></i> 光敏史
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[3].a" name="ckb" value="3"><i></i> 糖尿病
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[4].a" name="ckb" value="4"><i></i> 抑郁类
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[5].a" name="ckb" value="5"><i></i> 遗产类
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[6].a" name="ckb" value="6"><i></i> 肾病
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[7].a" name="ckb" value="7"><i></i> 肝病
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[8].a" name="ckb" value="8"><i></i> 免疫性疾病
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[9].a" name="ckb" value="9"><i></i> 精神类病
+                      </label>
+                      <label class="checkbox-inline i-checks unusal_ck">
+                        <input class="checkb" type="checkbox" ng-model="checkBox[10].a" name="ckb" value="10"><i></i> 心血管类疾病
+                      </label>
+                    </div>
+                  </div>
+                  <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                    <label class="gm-label">其他传染性疾病</label>
+                    <textarea maxlength="50" style="resize: none;" ng-model="user.othercontagion" class="form-control form-control-other" rows="6" placeholder="如果以上未出现可在此备注"></textarea>
+                  </div>
+                  <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                    <label class="gm-label">常见服药历史(包括营养类)</label>
+                    <textarea maxlength="50" style="resize:none;" class="form-control form-control-other" ng-model="medicinehistory" rows="6" placeholder="设计方案或健康状况描述"></textarea>
+                  </div>
+                  <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                    <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="update()" ng-disabled='form.$invalid'>确认修改</button>
+                    <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- / content col -->
+          </div>
+        </div>
+      </div>
+    </div><!-- end ngRepeat: tab in tabs -->
+  </div>
+<!--资料修改页面结束-->
+
+</div>

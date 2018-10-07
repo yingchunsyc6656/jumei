@@ -1,0 +1,61 @@
+<div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">完善客户信息/照片详情</h1>
+    </div>
+    <div class="wrapper-md" ng-controller="serviceAboutCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading financial-order-head">
+                <div style="width:50%;display: inline-block;float: left;">
+                    <span class="financical-order-time shop-transfer-name"> {{detailmsg.clinicalEnddate}}</span>
+                </div>
+            </div>
+            <div class="panel-body b-b b-light">
+                <div class="gm-table" style="margin-bottom: 0px;">
+                    <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">顾客姓名：<span style="color:#333;font-size:16px;">{{detailmsg.customerName}}</span></label>
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">设计师：<span style="color:#333;font-size:16px;">{{detailmsg.designerName}}</span></label>
+                    </div>
+                    <div style="width:33.3%;margin-bottom: 0px;" class="gm-table-tr">
+                      
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">场外：<span style="color:#333;font-size:16px;">{{detailmsg.consultName}}</span></label>
+                    </div>
+                    <div style="width:33.3%;" class="gm-table-tr">
+                        <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">护士：<span style="color:#333;font-size:16px;">{{detailmsg.nurseName}}</span></label>
+                    </div>
+                </div>
+                <div style="overflow:hidden;width:100%;">
+                    <div style="display:block;" class="gm-table">
+                        <div class="gm-table-tr" style="width:100%;height:auto;margin-bottom:0px;">
+                            <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">项目名称：<span style="color:#333;font-size:16px;">{{detailmsg.projectName}}</span></label>
+                        </div>
+                        <div class="gm-table-tr" style="width:100%;margin-bottom:0px;height: auto;">
+                            <label class="gm-label mypro-add-time" style="font-size:16px;color:#999;">医生：<span style="color:#333;font-size:16px;">{{detailmsg.doctorName}}</span></label>
+                        </div>
+                    </div>
+                    <div class="gm-table" style="height: auto;float: left;">
+                        <label class="gm-label">术前照片</label>
+                        <ul id="result">
+                            <li ng-repeat="igs in detImgLis">
+                                <div style="width:150px;height:150px;float: left;margin-right: 10px;position: relative;" class="inline bg-white wrapper-sm b-a">
+                                    <div class="bg-light" style="height:130px">
+                                        <img type="image/png" ng-src="{{igs.image}}" alt="" width="100%" height="100%">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="gm-table" style="height: auto;float: left;">
+                        <label class="gm-label">术后照片</label>
+                        <ul id="result-second">
+                            <li ng-repeat="igt in detImgLit">
+                                <div style="width:150px;height:150px;float: left;margin-right: 10px;position: relative;" class="inline bg-white wrapper-sm b-a">
+                                    <div class="bg-light" style="height:130px">
+                                        <img type="image/png" ng-src="{{igt.image}}" alt="" width="100%" height="100%">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

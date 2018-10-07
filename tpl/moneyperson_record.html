@@ -1,0 +1,182 @@
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">收款记录</h1>
+</div>
+<div class="wrapper-md" ng-controller="moneyrecordController">
+  <!--添加项目页面开始-->
+  <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+  <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+    <div style="overflow:hidden;width:900px;top:50px;" class="modal-dialog modal-width-664">
+      <div ng-show="Isedituser" style="overflow:hidden;">
+          <div class="wrapper-md">
+            <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+            <!-- / content col -->
+                <div style="height: auto;box-shadow: none;border: none;" class="panel panel-default ">
+                    <div class="des-task-center">
+                        <div class="des-task-img">
+                            <img src="img/image/logo.png" width="100%" height="100%"/>
+                        </div>
+                        <h1>项目缴费通知单</h1>
+                        <div style="margin-bottom:0px;height:auto;overflow:hidden;" class="gm-table">
+                            <div style="height:auto;width:33.33%;" class="gm-table-tr">
+                                <label style="line-height:33px;" class="gm-label">
+                                    <img style="margin-top:-5px;" src="img/image/designer_pic.png" alt="">
+                                    <span class="designer-bold-color">{{orsList.customerName}}</span></label>
+                            </div>
+                            <div style="height:auto;width:33.33%;" class="gm-table-tr">
+                                <label style="line-height:33px;" class="gm-label">
+                                    <img style="margin-top:-5px;" src="img/image/designer_phone.png" alt="">
+                                    <span class="designer-bold-color">{{orsList.customerPhone}}</span></label>
+                            </div>
+                            <div style="margin-bottom:0px;width:33.33%;height:auto;text-align:center;" class="gm-table-tr">
+                                <label class="designer-gray" class="gm-label">订单编号:<span style="color:#333;">{{orsList.orderNo}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:0px;height:auto;overflow:hidden;" class="gm-table">
+                            <div style="height:auto;width:33.33%;" class="gm-table-tr">
+                                <label style="line-height:33px;" class="gm-label">交款部门：<span>{{orsList.designerName}}</span></label>
+                            </div>
+                            <div style="height:auto;width:33.33%;" class="gm-table-tr">
+                                <label style="line-height:33px;" class="gm-label">场外老师：<span>{{orsList.consultName}}</span></label>
+                            </div>
+                        </div>
+                        <div style="overflow:hidden;width:100%;">
+                            <div style="width:100%;text-align:left;display: inline-block;float:left;margin-bottom:20px;">备注：<span>{{orsList.designerRemark==''?'--':orsList.designerRemark}}</span></div>
+                            <div style="width:100%;text-align:left;display: inline-block;float:left;">材料：<span>{{orsList.material}}</span></div>
+                        </div>
+                        <div class="tab-border-s">
+                            <table>
+                                <tr style="background:rgba(237,237,237,1);">
+                                    <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">项目</th>
+                                    <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">应缴费金额</th>
+                                    <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">医生</th>
+                                    <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">实收金额</th>
+                                </tr>
+                                <tr ng-repeat="mark in markList">
+                                    <td>{{mark.projectName}}</td>
+                                    <td>{{mark.projectMoney}}</td>
+                                    <td>{{mark.doctorName}}</td>
+                                    <td>{{mark.assessMoney}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="padding-left: 20px;" class="ls-width">
+                        <div style="padding-top: 0px;padding-right: 20px;">
+                            <div style="position: relative;" class="table-responsive">
+                                <div class="gm-table ft" style="overflow: hidden;">
+                                    <div class="gm-table-tr" style="float: left;width: auto;">
+                                        <p style="font-size: 16px;line-height:30px;color: #4A4A4A;">
+                                            <span class="l-hi">合计金额：</span><span style="color:red;">{{orsList.costMoney}}</span>
+                                            <span>
+                                                (<span ng-if="orsList.wechatMoney!=0">微信:{{orsList.wechatMoney}}</span>
+                                                <span ng-if="orsList.slotcordMoney!=0">刷卡:{{orsList.slotcordMoney}}</span>
+                                                <span ng-if="orsList.cashMoney!=0">现金:{{orsList.cashMoney}}</span>
+                                                <span ng-if="orsList.loanMoney!=0">贷款:{{orsList.loanMoney}}</span>
+                                                <span ng-if="orsList.alipayMoney!=0">支付宝:{{orsList.alipayMoney}}</span>)
+                                            </span>
+                                        </p>
+                                        <p style="font-size: 16px;line-height:30px;color: #4A4A4A;">
+                                            <span class="l-hi">收款人：</span>
+                                            <span >{{orsList.financeName}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="gm-table-tr" style="width: auto;float: right;text-align:right;">
+                                        <p style="font-size: 16px;line-height:30px;color: #4A4A4A;text-align:right;">
+                                            <span class="l-hi">下单时间：</span><span>{{orsList.designerDate}}</span>
+                                        </p>
+                                        <p style="font-size: 16px;line-height:30px;color: #4A4A4A;text-align:right;">
+                                            <span style="padding-left:20px;" class="l-hi">收款时间：</span>
+                                            <span >{{orsList.proceedDate}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- / content col -->
+                <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                    <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+    <!-- / content col -->
+    <div class="col b-l bg-auto no-border-xs">
+          <div class="wrapper-md">
+                <div class="gm-table">
+                    <div class="gm-table-tr">
+                        <label class="gm-label">查询</label>
+                        <input type="text" class="form-control input-sm w-sm inline m-r" placeholder="订单号或设计师" ng-model="user.queryData" required/>
+                    </div>
+                    <div class="gm-table-tr">
+                        <label class="gm-label">时间区间</label>
+                        <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" ng-change="dateChange(dt)" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="gm-table-tr">
+                        <label class="gm-label"></label>
+                        <div>
+                            <div class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dts" ng-change="datChange(dts)" is-open="opensMore" datepicker-options="dateOptions" ng-required="true" close-text="关闭"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width: 190px;">
+                        <button class="btn btn-bolting ntr" ng-click="Screening()">筛选</button>
+                    </div>
+                </div>
+            <!-- tasks -->
+            <div style="width:100%;float: left;">
+              <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                <div class="panel panel-default panel-bg" style="box-shadow:none;border:none;">
+                  <div class="table-responsive" ng-show="NoRecords">
+                     <p class="noMessage">暂无收款记录信息</p>
+                  </div>
+                  <div class="table-responsive" ng-show="IsRecords">
+                    <table class="table table-striped m-b-none">
+                      <thead>
+                      <tr>
+                        <th  style="width:15%">订单号</th>
+                        <th  style="width:22%">时间</th>
+                        <th  style="width:18%">设计师</th>
+                        <th  style="width:20%">合计</th>
+                        <!-- <th style="width: 15%">操作人</th> -->
+                        <th style="width: 10%">操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="records in recordsList track by $index">
+                          <td ng-click="detailInfo($index)">{{records.orderNo}}</td>
+                          <td>{{records.operateDate}}</td>
+                          <td>{{records.designerName}}</td>
+                          <td>{{records.costMoney}}</td>
+                          <!-- <td>{{records.operator}}</td> -->
+                          <td><a href="" ng-click="detailInfo($index)">详情</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="recordPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- / tasks -->
+          </div>
+    </div>
+    <!-- / content col -->
+  </div>
+</div>

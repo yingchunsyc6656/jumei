@@ -1,0 +1,53 @@
+<div class="bg-light lter wrapper-md">
+        <h1 class="m-n font-thin h3">仓库库存</h1>
+</div>
+<div class="wrapper-md" ng-controller="wareHouseStockController">
+          <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+            <!-- / content col -->
+            <div class="col b-l bg-auto no-border-xs">
+                  <div class="wrapper-md">
+                    <div class="gm-table">
+                      <div class="gm-table-tr" style="width: 280px;">
+                        <label class="gm-label">搜索药品</label>
+                        <input type="text" class="form-control input-sm w-sm inline m-r" style="width: 244px;" placeholder="输入药品关键词" ng-model="materialName" required/>
+                      </div>
+                      <div class="gm-table-trs">
+                        <label class="gm-label"></label>
+                        <button class="btn btn-bolting gm-btr" ng-click="wareQuery()">查询</button>
+                      </div>
+                    </div>
+                    <!-- tasks -->
+                    <div style="width:100%;float: left;">
+                      <div class="wrapper-md" style="padding: 15px 0px 0px 0px;">
+                        <div class="panel panel-default panel-bg" style="box-shadow:none;border:none;">
+                          <div class="table-responsive" ng-show="NoRecords">
+                            <p class="noMessage">暂无出入记录信息</p>
+                          </div>
+                          <div class="table-responsive" ng-show="IsRecords">
+                            <table class="table table-striped m-b-none">
+                              <thead>
+                                <tr>
+                                  <th  style="width:33.33%">药品名称</th>
+                                  <th  style="width:33.33%;position: relative;">库存数量<i class="rank sorting"></i></th>
+                                  <th style="width:33.33%;">操作</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="ware in wareList">
+                                  <td>{{ware.materialName}}</td>
+                                  <td>{{ware.number}}</td>
+                                  <td><span style="padding:0;" class="first-span"><a ng-href="#/app/room/records?materialId={{ware.materialId}}">出入库记录</a></span></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div jj-pager pager-info="detailPager" showpagenum="10" on-page-change="recordPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- / tasks -->
+                  </div>
+            </div>
+            <!-- / content col -->
+          </div>
+        </div>

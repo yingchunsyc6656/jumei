@@ -1,0 +1,194 @@
+<div class="bg-light lter b-b wrapper-md" style="position:relative;">
+        <h1 class="m-n font-thin h3">工作台</h1>
+        <div class="refresh">
+            <i><img id="re-img" class="refresh-icon" src="img/image/refresh.png" width="100%" height="100%"/></i>
+            <b>刷新</b>
+        </div>
+    </div>
+    <div class="wrapper-md" ng-controller="nurseController">
+        <!-- 弹窗start -->
+        <div class="modal-backdrop fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1040 + (index &amp;&amp; 1 || 0) + index*10}" modal-backdrop="" style="z-index: 1040;" ng-show="modalDrop"></div>
+        <div role="dialog" class="modal fade in" style="overflow-x: hidden;overflow-y: hidden;" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10, display: 'block'}"  index="0" animate="animate" style="z-index: 1050; display: block;" ng-show="modalDialog">
+          <div style="overflow:hidden;width:500px;top:250px;" class="modal-dialog modal-width-664">
+                <!-- 申请改单start -->
+                <div ng-show="Isedituser">
+                <div class="wrapper-md">
+                    <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                    <form name="form" class="form-validation" id="formTable">
+                        <div class="col b-l bg-auto no-border-xs">
+                        <div class="wrapper-md">
+                            <p style="text-align:center;color:#5488f8;font-size:22px;">退回说明</p>
+                            <div class="text-danger wrapper text-center">
+                            {{modelauthError}}
+                            </div>
+                            <div class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                            <label class="gm-label">退回原因</label>
+                            <textarea style="resize: none;width:400px" ng-model="user.othercontagion" class="form-control form-control-other" rows="6" placeholder="说明备注"></textarea>
+                            </div>
+                            <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                            <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="update()" ng-disabled='form.$invalid'>确认</button>
+                            <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                <!-- 申请改单end -->
+                <!-- 开始手术start -->
+                <div ng-show="Isoperation">
+                    <div class="wrapper-md">
+                        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                        <form name="form" class="form-validation" id="formTable">
+                            <div class="col b-l bg-auto no-border-xs">
+                            <div class="wrapper-md">
+                                <p style="text-align:center;color:#5488f8;font-size:22px;">是否开始手术</p>
+                                <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                            <!-- 请确认手术是否完成并且拍摄照片 -->
+                                </div>
+                                <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="startopera()" ng-disabled='form.$invalid'>确认</button>
+                                <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 开始手术end -->
+                <!-- 完成手术start -->
+                <div ng-show="Isfinish">
+                    <div class="wrapper-md">
+                        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                        <form name="form" class="form-validation" id="formTable">
+                            <div class="col b-l bg-auto no-border-xs">
+                            <div class="wrapper-md">
+                                <p style="text-align:center;color:#5488f8;font-size:22px;">是否完成手术</p>
+                                <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                            请确认手术是否完成并且拍摄照片
+                                </div>
+                                <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="finishopera()" ng-disabled='form.$invalid'>确认</button>
+                                <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 完成手术end -->
+                <!-- 结束订单start -->
+                <div ng-show="IsOverorder">
+                    <div class="wrapper-md">
+                        <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;border-radius:6px;">
+                            <form name="form" class="form-validation" id="formTable">
+                                <div class="col b-l bg-auto no-border-xs">
+                                    <div class="wrapper-md">
+                                        <p style="text-align:center;color:#5488f8;font-size:22px;">是否结束订单</p>
+                                        <div style="height:100px;width:100%;text-align:center;font-size:20px;color:rgba(153,153,153,1);" class="gm-table-tr gm-table-trw gm-table-tr-fn">
+                                    <!-- 请确认手术是否完成并且拍摄照片 -->
+                                        </div>
+                                        <div class="gm-table-tr" style="width: 100%;text-align:center;margin:0 auto;">
+                                        <button style="margin-top:0px;" class="btn btn-bolting ntr" ng-click="endOrder()" ng-disabled='form.$invalid'>确认</button>
+                                        <button style="margin-top:0px;" class="btn btn-cancel ntr" ng-click="cancel()">返回</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 结束订单end -->
+        </div><!-- end ngRepeat: tab in tabs -->
+        </div>
+      <!--弹窗end-->
+        <div ng-show="noTable">
+            <p class="noMessage">暂无新订单信息</p>
+        </div>
+        <div ng-show="orderList">
+        <div ng-repeat="nurse in nurseList track by $index" class="panel panel-default">
+            <div class="panel-heading financial-order-head">
+                <div style="width:50%;display: inline-block;float: left;">
+                    <span class="financical-order-time">{{nurse.proceedDate}}</span>
+                    <span class="financical-order-money">订单金额：<span>{{nurse.costMoney}}</span></span>
+                </div>
+                <div class="financical-order-right nurse-order-right">
+                    <a class="financical-order-return" ng-if="nurse.orderStatus=='4'" ng-click="backchange(nurse.orderNo)"><i></i>申请改单</a>
+                    <a ng-if="nurse.orderStatus=='4'" class="financical-order-del" ng-click="overorder(nurse.orderNo)"><i></i>结束订单</a>
+                    <a style="margin-right:0px;color:#FB788C;" ng-if="nurse.orderStatus=='4'" class="financical-order-take"  ng-click="startOperation($index)"><i></i>开始手术</a>
+                    <a style="margin-right:0px;" ng-if="nurse.orderStatus=='5'" class="financical-order-take"  ng-click="finishOperation($index)"><i></i>完成手术</a>
+                    <a style="margin-right:0px;color:#84D389;" ng-if="nurse.orderStatus=='6'||nurse.orderStatus=='7'||nurse.orderStatus=='8'||nurse.orderStatus=='10'" class="financical-order-take"><i></i>手术已完成</a>
+                </div>
+            </div>
+            <div class="panel-body b-b b-light">
+                <div class="gm-table nurse-nameout">
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label class="gm-label" style="width:auto;height:35px;line-height:35px;">顾客姓名：</label>
+                        <div style="width:200px;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{nurse.customerName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="gm-table" style="margin-bottom: 0px;width: 100%;height:45px;float: left;">
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label class="gm-label" style="width:70px;height:35px;line-height:35px;">设计师：</label>
+                        <div style="width:200px;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{nurse.designerName}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label class="gm-label" style="width:auto;height:35px;line-height:35px;">场外：</label>
+                        <div style="width:200px;float:left;height:35px;line-height:35px;">
+                            {{nurse.consultName}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label style="height:35px;line-height:35px;width:auto;" class="gm-label" style="width:auto;">跟台护士：</label>
+                        <select disabled="disabled;" ng-if="nurse.orderStatus=='5'||nurse.orderStatus=='6'||nurse.orderStatus=='7'||nurse.orderStatus=='8'||nurse.orderStatus=='10'" name="" id="" class="form-control" style="width:150px;height:35px;line-height:35px;" ng-model="nurse.nuserName" required>
+                            <option ng-show="hiddennurse" value="{{nurse.nurseName}}">{{nurse.nuserName}}</option>
+                            <option value="{{role.rolename}}" ng-repeat="role in nurseQueryList track by $index">{{role.rolename}}</option>
+                        </select>
+                        <select ng-if="nurse.orderStatus=='4'" ng-click="changenurse($index)" name="" id="" class="form-control" style="width:150px;height:35px;line-height:35px;" ng-model="nurse.nuserName" required>
+                            <option ng-show="hiddennurse" value="{{nurse.nurseName}}">{{nurse.nuserName}}</option>
+                            <option value="{{role.rolename}}" ng-repeat="role in nurseQueryList track by $index">{{role.rolename}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div ng-repeat="item in nurse.project" class="gm-table" style="margin-bottom: 0px;width: 100%;height:45px;float: left;">
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label class="gm-label" style="width:auto;height:35px;line-height:35px;">项目名称：</label>
+                        <div style="width:440px;float:left;height:35px;line-height:35px;margin-left: 18px;">
+                            {{item.projectName}}
+                        </div>
+                    </div>
+                    <div class="gm-table-tr" style="width:auto;height: 45px;">
+                        <label style="height:35px;line-height:35px;width:70px;" class="gm-label" style="width:auto;">医生：</label>
+                        <select ng-if="nurse.orderStatus=='4'" name="" id="" ng-model="item.doctorName"  class="form-control" style="width:150px;height:35px;line-height:35px;">
+                            <option value="{{item.doctorName}}">{{item.doctorName}}</option>
+                            <option value="{{role.enumname}}"  ng-repeat="role in doctorQueryList track by $index" >{{role.enumname}}</option>
+                        </select>
+
+
+                        <select disabled="disabled" ng-if="nurse.orderStatus=='5'||nurse.orderStatus=='6'||nurse.orderStatus=='7'||nurse.orderStatus=='8'||nurse.orderStatus=='10'" name="" id="" ng-model="item.doctorName"  class="form-control" style="width:150px;height:35px;line-height:35px;">
+                            <option ng-show="hiddendoctor" value="{{item.doctorName}}">{{item.doctorName}}</option>
+                            <option value="{{role.enumname}}"  ng-repeat="role in doctorQueryList track by $index" >{{role.enumname}}</option>
+                        </select>
+                        <select ng-if="orderStatus=='4'" ng-click="change($index)" name="" id="" ng-model="item.doctorName"  class="form-control" style="width:150px;height:35px;line-height:35px;">
+                            <option ng-show="hiddendoctor" value="{{item.doctorName}}">{{item.doctorName}}</option>
+                            <option value="{{role.enumname}}"  ng-repeat="role in doctorQueryList track by $index" >{{role.enumname}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="gm-table">
+                <div class="gm-table-tr" style="float: none;margin: 0 auto;">
+                    <button style="margin-top:0px;" class="btn btn-bolting" style="margin-left: 25px;" ng-click="loadingMore()">{{loadingText}}</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

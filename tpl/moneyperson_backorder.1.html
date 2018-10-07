@@ -1,0 +1,154 @@
+
+<div class="bg-light lter wrapper-md">
+    <h1 class="m-n font-thin h3">退回订单</h1>
+</div>
+<!--近期预约状况-->
+<div class="wrapper-md" style="padding: 15px 15px 0px 15px;overflow:hidden;margin-top:15px;background-color:#fff;">
+        <!-- tasks -->
+        <div style="width:100%;float: left;background-color: #fff;">
+            <div style="height: auto;box-shadow: none;border: none;" class="panel panel-default ">
+                <div class="des-lr-include">
+                    <button style="width: 35px;height:35px;border:none;" class="left-btn" style="display:inline-block;" href="" ng-click="previousPage()"></button>
+                    <button style="width: 35px;height:35px;border:none;" class="right-btn" style="display:inline-block;" href="" ng-click="nextPage()"></button>
+                </div>
+                <div class="des-task-center">
+                    <div class="refund-out">
+                        <p><span class="l-hi">退款人：</span><span>操作退款的人</span></p>
+                        <p><span class="l-hi">退款原因：</span><span>操作退款的人</span></p>
+                    </div>
+                    <div class="des-task-img">
+                    </div>
+                    <h1>项目缴费通知单</h1>
+                    <!-- <div style="width:100%;overflow:hidden;height:45px;" class="about-msg"> -->
+                            <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                            <div class="gm-table">
+                                <div class="gm-table-tr">
+                                    <label style="line-height:33px;" class="gm-label">姓名：<span>{{customerName}}</span></label>
+                                </div>
+                                <div class="gm-table-tr">
+                                    <label style="line-height:33px;" class="gm-label">电话：<span>{{customerPhone}}</span></label>
+                                </div>
+                                <div class="gm-table-tr" style="width:auto;margin-right:90px;height:auto;">
+                                    <!-- chosen -->
+                                    <link rel="stylesheet" type="text/css" href="vendor/jquery/chosen/chosen.css"/>
+                                    <label class="gm-label">交款部门：<div class="chosen-container chosen-container-single onechosen-container" style="width:150px;height: 34px;" title="">
+                                            <a class="chosen-single chosen-default" ng-click="oneSingle()">
+                                                <span ng-show="onepleaseSelect">请选择</span>
+                                                <span ng-show="onedgner">{{user.oneProjectname}}</span>
+                                                <div>
+                                                    <b></b>
+                                                </div>
+                                            </a>
+                                            <div class="chosen-drop" ng-show="onechosenDrop">
+                                                <div class="chosen-search">
+                                                    <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.oneName" ng-change="oneChange()"/>
+                                                </div>
+                                                <ul class="chosen-results">
+                                                    <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="oneProject($index)">{{types.projectName}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </label>
+                                </div>
+                                <div class="gm-table-tr" style="height:auto;">
+                                    <label class="gm-label"><div class="chosen-container chosen-container-single onechosen-container" style="width:150px;height: 34px;" title="">
+                                            <a class="chosen-single chosen-default" ng-click="oneSingle()">
+                                                <span ng-show="onepleaseSelect">请选择</span>
+                                                <span ng-show="onedgner">{{user.oneProjectname}}</span>
+                                                <div>
+                                                    <b></b>
+                                                </div>
+                                            </a>
+                                            <div class="chosen-drop" ng-show="onechosenDrop">
+                                                <div class="chosen-search">
+                                                    <input type="text" class="design_input" autocomplete="off" placeholder="搜索关键字" ng-model="user.oneName" ng-change="oneChange()"/>
+                                                </div>
+                                                <ul class="chosen-results">
+                                                    <li class="active-result" data-option-array-index="{{$index}}" style="" ng-repeat="types in projectQueryList track by $index" ng-click="oneProject($index)">{{types.projectName}}</li>
+                                                </ul>
+                                            </div>
+                                        </div></label>
+                                </div>
+                                <div class="gm-table-tr" style="width: 190px;float:right;height:auto;">
+                                    <label style="text-align:right;line-height:33px;" class="gm-label">
+                                        客户信息：<a style="color:
+                                        #5488F8 " ng-click="perfectMsg(customerId)">完善信息</a>
+                                    </label>
+                                </div>
+                    </div>
+                    <div style="overflow:hidden;width:100%;" class="">
+                        <div style="width:50%;text-align:left;display: inline-block;float:left;">备注：<input style="width: 200px;" type="text" class="form-control input-sm w-sm inline m-r" placeholder="输入关键词" ng-model="user.projectremark" required/></div>
+                        <div style="width:50%;text-align:right;display:inline-block;">
+                            <button ng-show="true" style="margin-left: 20px;margin-top:0px;" class="btn btn-bolting ntr btn-des-sub" ng-click="confirmrecept(orderNo)">确认接待</button>
+                            <button ng-show="editProject" style="margin-left: 20px;margin-top:0px;" class="btn btn-bolting ntr btn-des-sub" ng-click="editproject(orderNo)">添加项目</button>
+                        </div>  
+                    </div>
+                    <div class="tab-border-s">
+                        <table>
+                            <tr>
+                                <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">项目</th>
+                                <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">应缴费金额</th>
+                                <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">医生</th>
+                                <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">实收金额</th>
+                                <th style="width:20%;text-align:center; border: 1px solid #ccc !important;">操作</th>
+                            </tr>
+                            <tr>
+                                <td>针剂注射 玻尿酸 海威</td>
+                                <td>8888</td>
+                                <td>彭勇</td>
+                                <td>
+                                    <input class="inpmoney" type="number" min="1" ng-model="inpmoney" ng-change="actualMoney($index,inpmoney)" style="border:none;width:100%;height:36px;">
+                                </td>
+                                <td><span class="first-span"><a ng-click="editproject(ds.appointId)">编辑</a></span><span class="second-span"><a ng-click="delproject(ds.appointId)">删除</a></span></td>
+                            </tr>
+                            <tr>
+                                <td>针剂注射 玻尿酸 海威</td>
+                                <td>8888</td>
+                                <td>彭勇</td>
+                                <td>
+                                    <input class="inpmoney" type="number" min="1" ng-model="inpmoney" ng-change="actualMoney($index,inpmoney)" style="border:none;width:100%;height:36px;">
+                                </td>
+                                <td><span class="first-span"><a ng-click="editproject(ds.appointId)">编辑</a></span><span class="second-span"><a ng-click="delproject(ds.appointId)">删除</a></span></td>
+                            </tr>
+                            <tr>
+                                <td>针剂注射 玻尿酸 海威</td>
+                                <td>8888</td>
+                                <td>彭勇</td>
+                                <td>
+                                    <input class="inpmoney" type="number" min="1" ng-model="inpmoney" ng-change="actualMoney($index,inpmoney)" style="border:none;width:100%;height:36px;">
+                                </td>
+                                <td><span class="first-span"><a ng-click="editproject(ds.appointId)">编辑</a></span><span class="second-span"><a ng-click="delproject(ds.appointId)">删除</a></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="padding-left: 20px;" class="ls-width">
+                    <div style="padding-top: 0px;padding-right: 20px;">
+                        <div style="position: relative;" class="table-responsive">
+                            <div class="gm-table ft" style="height: 40px;overflow: hidden;">
+                                    <div class="gm-table-tr" style="float: left;width: auto;">
+                                <p style="font-size: 18px;line-height:30px;color: #4A4A4A;"><span class="l-hi">合计金额：</span><span>8888</span>
+                                </p>
+                                </div>
+                                <div class="gm-table-tr" style="float: left;width: auto;margin-left:30px;">
+                                    <p style="font-size: 18px;line-height:30px;color:#FB788C;">
+                                        订单已经支付5000
+                                    </p>
+                                </div>
+                                <div class="gm-table-tr" style="float: right;width: auto;text-align:right;">
+                                    <button style="margin-left: 20px;width:95px;" class="btn btn-bolting btn-des-sub " ng-click="">提交财务</button>
+                                </div>
+                                <div class="gm-table-tr" style="width: auto;float:right;">
+                                    <p style="font-size: 18px;line-height:30px;color:#666;">
+                                        <span class="l-hi">实收金额：</span><span>8888</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / tasks -->
+    </div>
+    <!--近期预约状况-->

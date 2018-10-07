@@ -1,0 +1,37 @@
+<!-- main -->
+  <div class="col" ng-controller="checkHistoryController">
+      <div class="wrapper-md">
+          <div class="panel-default def-relative panel-bg" style="float: left;width: 100%;">
+              <div style="padding-top:0px;" class="wrapper-md">
+                  <div style="width:100%;float: left;">
+                      <div class="wrapper-md" style="padding: 0px;">
+                          <div class="panel panel-default panel-bg" style="box-shadow:none;border:none;">
+                              <div class="table-responsive">
+                                  <div class="ft" style="height: 40px;margin-bottom:10px;width: 100%;">
+                                      <h3 style="font-size: 18px;color: #4A4A4A;">历史对账</h3>
+                                  </div>
+                                  <table class="table table-striped m-b-none">
+                                      <thead>
+                                      <tr>
+                                          <th  style="width:25%">时间</th>
+                                          <th  style="width:45%">收款金额</th>
+                                          <th style="width: 30%">确认人</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr ng-repeat="history in historyList">
+                                              <td>{{history.sureDate}}</td>
+                                              <td>{{history.totalMoney}}</td>
+                                              <td>{{history.sureName}}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <div jj-pager pager-info="detailPager" showpagenum="5" on-page-change="reconPage(pager)" style="margin-top: 20px;float: right;margin-bottom: 20px;"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

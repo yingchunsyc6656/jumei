@@ -1,0 +1,300 @@
+<div class="bg-light lter wrapper-md" style="padding-bottom:0;">
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+            <h1 class="m-n font-thin h3 text-black">工作台</h1>
+        </div>
+    </div>
+</div>
+<!-- 设计师工作台 -->
+<div class="wrapper-md"> <!--ng-controller="FlotChartDemoCtrl">-->
+    <!-- tasks -->
+    <div class="panel wrapper" style="margin-bottom:0;border: 0;padding: 0px 15px 0px 15px;">
+        <div class="row">
+            <div style="height: 174px;" class="row-header">
+                <div class="row-header-list">
+                    <ul>
+                        <li style="width: 33.3%;">
+                            <div style="margin-top: 20px;" class="row-div">
+                                <div class="row-div-one">
+                                    <div class="row-icon">
+                                        <img src="img/image/designer_img_home.png" width="100%" height="100%" alt=""/>
+                                    </div>
+                                </div>
+                                <p class="row-icon-p0 today_num"><b>15</b></p>
+                                <p class="row-icon-p1">今日预约/人</p>
+                            </div>
+                            <div class="row-line"></div>
+                        </li>
+                        <li style="width: 33.3%;">
+                            <div style="margin-top: 20px;" class="row-div">
+                                <div class="row-div-one">
+                                    <div class="row-icon">
+                                        <img src="img/image/designer_no_home.png" width="100%" height="100%" alt=""/>
+                                    </div>
+                                </div>
+                                <p class="row-icon-p0 today_num"><b>1200</b></p>
+                                <p class="row-icon-p1">本月预约/人</p>
+                            </div>
+                            <div class="row-line"></div>
+                        </li>
+                        <li style="width: 33.3%;">
+                            <div style="margin-top: 20px;" class="row-div">
+                                <div class="row-div-one">
+                                    <div class="row-icon">
+                                        <img src="img/image/designer_ok_home.png" width="100%" height="100%" alt=""/>
+                                    </div>
+                                </div>
+                                <p class="row-icon-p0 today_num"><b>50/100万</b></p>
+                                <p class="row-icon-p1">本月目标/万</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / tasks -->
+
+    <!-- tasks -->
+    <div class="row" ng-controller="ModalDemoCtrl">
+        <script type="text/ng-template" id="modalDetails.html">
+            <div ng-include="'tpl/modalDetails.html'"></div>
+        </script>
+        <script type="text/ng-template" id="modalUserMsg.html">
+            <div ng-include="'tpl/modalUserMsg.html'"></div>
+        </script>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div ng-include="'tpl/modal.html'"></div>
+        </script>
+        <script type="text/ng-template" id="modalAddItem.html">
+            <div ng-include="'tpl/modalAddItem.html'"></div>
+        </script>
+        <script type="text/ng-template" id="modalEditMsg.html">
+            <div ng-include="'tpl/modalEditMsg.html'"></div>
+        </script>
+        <!--近期预约状况-->
+        <div class="wrapper-md" style="padding: 15px 15px 0px 15px;">
+            <!-- tasks -->
+            <div style="width:100%;float: left;background-color: #fff;">
+                <div style="height: auto;box-shadow: none;border: none;" class="panel panel-default ">
+                    <div style="box-shadow: none;" class="panel">
+                        <div style="width: 50%;display: inline-block;" class="header-top">
+                            <p style="padding-left: 10px;">我的状态：&nbsp;&nbsp;<span class="l-hi">接待中</span><i style="margin-left: 10px;" class="l-hi">等待5人</i></p>
+                        </div>
+                        <div class="btn-group btn-des-status" ng-init="radioModel = 'true'">
+                            <label class="btn btn-success des-status-null" ng-model="radioModel" btn-radio="'true'"><i class="fa fa-check text-active"></i>空闲</label>
+                            <label class="btn des-status-back" ng-model="radioModel" btn-radio="'false'"><i class="fa fa-check text-active"></i>暂离</label>
+                        </div>
+                    </div>
+                    <div style="height: 110px;">
+                        <p class="no-pre-people">暂时无预约人，点击刷新查看预约</p>
+                        <p class="no-pre-refresh"><a ng-click="refresh-despre()" style="color: #666;">刷新</a></p>
+                    </div>
+                    <div style="padding-left: 20px;" class="ls-width">
+                        <div class="gm-table">
+                            <div class="gm-table-tr">
+                                <label class="gm-label">咨询室</label>
+                                <select ui-jq="chosen" style="width: 150px;height: 34px;">
+                                    <option value="0">请选择</option>
+                                    <option value="1">Hawaii</option>
+                                    <option value="2">California</option>
+                                    <option value="3">Nevada</option>
+                                    <option value="4">Oregon</option>
+                                    <option value="5">Washington</option>
+                                </select>
+                            </div>
+                            <div class="gm-table-tr">
+                                <label class="gm-label">设计师</label>
+                                <select name="account" class="form-control m-b m-bg" style="width: 150px;height: 34px;">
+                                    <option>option 1</option>
+                                    <option>option 2</option>
+                                    <option>option 3</option>
+                                    <option>option 4</option>
+                                </select>
+                            </div>
+                            <div class="gm-table-tr">
+                                <label class="gm-label"></label>
+                                <button style="background: #98a2c1;border:1px solid #98a2c1;" class="btn btn-bolting gm-btr" ng-click="openUserMsg('lg')">客户信息</button>
+                            </div>
+                            <div style="margin-top:26px;" class="btn-des-status btn-des-page">
+                                <a href=""><i class="glyphicon text-md text-col wrapper-sm">«上一位</i></a>
+                                <div class="des-page-centerline"></div>
+                                <a href=""><i class="glyphicon text-md text-col wrapper-sm">下一位»</i></a>
+                                <!-- <a class="btn des-previous-people">«上一位</a><div style="border: .5px solid #ccc;display:inline-block;height: 22px;width: 0px;position: relative;top: 8px;"></div>
+                                <a class="btn des-next-people">下一位»</a> -->
+                                <!-- <label class="btn des-previous-people" ng-model="radioModel" btn-radio="'true'"><i class="fa fa-check text-active"></i>空闲</label>
+                                <label class="btn des-status-back" ng-model="radioModel" btn-radio="'false'"><i class="fa fa-check text-active"></i>暂离</label> -->
+                            </div>
+                        </div>
+                        <div style="padding-top: 0px;padding-right: 20px;margin-bottom: 20px;">
+                            <div class="table-responsive">
+                                <div style="width: 100%;" class="table-ls">
+                                    <ul>
+                                        <li>
+                                            <div class="ls-div0">预约单号</div>
+                                            <div class="ls-div1">1245548811321</div>
+                                            <div class="ls-div0">预约时间</div>
+                                            <div class="ls-div1">2018/3/8 21：30</div>
+                                        </li>
+                                        <li>
+                                            <div class="ls-div0">姓名</div>
+                                            <div class="ls-div1">赵新梅</div>
+                                            <div class="ls-div0">预约项目</div>
+                                            <div class="ls-div1">隆胸，双眼皮</div>
+                                        </li>
+                                        <li>
+                                            <div class="ls-div0">电话</div>
+                                            <div class="ls-div1">18860356666</div>
+                                            <div class="ls-div0">预约医生</div>
+                                            <div class="ls-div1">刘明医生</div>
+                                        </li>
+                                        <li>
+                                            <div class="ls-div0">来源</div>
+                                            <div class="ls-div1">新媒体</div>
+                                            <div class="ls-div0">是否麻醉</div>
+                                            <div class="ls-div1">是</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 0px;padding-right: 20px;">
+                            <div style="position: relative;" class="table-responsive">
+                                <div class="gm-table ft" style="height: 40px;">
+                                    <p style="font-size: 18px;line-height:40px;color: #4A4A4A;">项目设置&nbsp;&nbsp;<span style="font-size:14px;" class="l-hi">总计：</span><span style="font-size: 14px;">18000</span></p>
+                                </div>
+                                <div class="panel-icon">
+                                    <a ng-click="openAddItem('w664')">
+                                        <img src="img/image/img_add.png" width="100%" height="100%"/>
+                                    </a>
+                                </div>
+                                <table ui-jq="dataTable" class="table table-striped m-b-none" >
+                                    <thead>
+                                    <tr>
+                                        <th  style="width:15%">预约项目</th>
+                                        <th  style="width:13%">医生</th>
+                                        <th  style="width:14%">价格</th>
+                                        <th  style="width:14%">材料</th>
+                                        <th  style="width:21%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">手术类没有材料</td>
+                                        <td data-value="1"><span class="first-span"><a ng-click="openEditMsg('w664')">编辑</a></span><span class="second-span"><a ng-href="">删除</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">手术类没有材料</td>
+                                        <td data-value="1"><span class="first-span"><a ng-href="">编辑</a></span><span class="second-span"><a ng-href="">删除</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">手术类没有材料</td>
+                                        <td data-value="2"><span class="first-span"><a ng-href="">编辑</a></span><span class="second-span"><a ng-href="">删除</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">手术类没有材料</td>
+                                        <td data-value="2"><span class="first-span"><a ng-href="">编辑</a></span><span class="second-span"><a ng-href="">删除</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">手术类没有材料</td>
+                                        <td data-value="3"><span class="first-span"><a ng-href="">编辑</a></span><span class="second-span"><a ng-href="">删除</a></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="gm-table-tr" style="width: 213px;float: right;">
+                                    <button style="color:#999;font-size:16px;;margin-left: 0px;" class="btn ntr btn-des-sub" ng-click="">结束接待</button>
+                                    <button style="margin-left: 20px;" class="btn btn-bolting ntr btn-des-sub" ng-click="">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 0px;padding-right: 20px;">
+                            <div class="table-responsive">
+                                <div class="gm-table ft" style="height: 40px;">
+                                    <p style="font-size: 18px;line-height:40px;color: #4A4A4A;">近期预约情况</p>
+                                </div>
+                                <table ui-jq="dataTable" class="table table-striped m-b-none" >
+                                    <thead>
+                                    <tr>
+                                        <th  style="width:10%">预约单号</th>
+                                        <th  style="width:15%">预约项目</th>
+                                        <th  style="width:13%">设计师</th>
+                                        <th  style="width:13%">医生</th>
+                                        <th  style="width:14%">预约时间</th>
+                                        <th  style="width:14%">到店时间</th>
+                                        <th  style="width:21%">状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>21516152151615</td>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td>谢敏</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>1077</td>
+                                        <td data-value="78025368997">2018/3/18</td>
+                                        <td data-value="1"><span class="label bg-warning" title="Active">已缴费</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>21516152151615</td>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td>谢敏</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>2018/6/20</td>
+                                        <td data-value="78025368997">2018/3/18</td>
+                                        <td data-value="1"><span class="label bg-warning" title="Active">手术中</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>21516152151615</td>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td>谢敏</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>2018/6/20</td>
+                                        <td data-value="78025368997">2018/3/18</td>
+                                        <td data-value="2"><span class="label bg-light" title="Disabled">已预约</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>21516152151615</td>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td>谢敏</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>2018/6/20</td>
+                                        <td data-value="78025368997">2018/3/18</td>
+                                        <td data-value="2"><span class="label bg-danger" title="Disabled">未成单</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>21516152151615</td>
+                                        <td>(3)眼部 丰胸 瘦脸</td>
+                                        <td>谢敏</td>
+                                        <td><a href>仲尼</a></td>
+                                        <td>2018/6/20</td>
+                                        <td data-value="78025368997">2018/3/18</td>
+                                        <td data-value="3"><span class="label bg-success" title="Suspended">完成</span>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / tasks -->
+            </div>
+            <!--近期预约状况-->
+        </div>
+        <!-- / tasks -->
+    </div>
+    <!--/ 设计师工作台 -->
